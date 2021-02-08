@@ -1,7 +1,7 @@
-import addDevelopmentMiddlewares from "./environments/addDevelopmentMiddlewares.js";
+import addDevelopmentMiddlewares from "./environments/addDevelopmentMiddlewares.js"
 
 const addEnvironmentMiddlewares = app => {
-  addDevelopmentMiddlewares(app);
-};
+  addDevelopmentMiddlewares(app)
+}
 
-export default addEnvironmentMiddlewares;
+export default addEnvironmentMiddlewares

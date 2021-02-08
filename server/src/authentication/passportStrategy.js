@@ -1,6 +1,6 @@
-import local from "passport-local";
+import local from "passport-local"
 
-import User from "../models/User.js";
+import User from "../models/User.js"
 
 const authHandler = (email, password, done) => {
   User.query()
@@ -8,13 +8,13 @@ const authHandler = (email, password, done) => {
     .then((user) => {
       if (user) {
         if (user.authenticate(password)) {
-          return done(null, user);
+          return done(null, user)
         }
 
-        return done(null, false, { message: "Invalid credentials" });
+        return done(null, false, { message: "Invalid credentials" })
       }
-      return done(null, false, { message: "Invalid credentials" });
-    });
-};
+      return done(null, false, { message: "Invalid credentials" })
+    })
+}
 
-export default new local.Strategy({ usernameField: "email" }, authHandler);
+export default new local.Strategy({ usernameField: "email" }, authHandler)
