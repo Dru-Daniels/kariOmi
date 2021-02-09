@@ -24,7 +24,7 @@ class Artist extends Model {
     return {
       songs: {
         relation: Model.HasManyRelation,
-        modelClass: Product,
+        modelClass: Song,
         join: {
           from: "artists.id",
           to: "songs.artistId"

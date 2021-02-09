@@ -30,6 +30,6 @@ artistsRouter.get('/:id', async (req, res) => {
   }
 })
 
-categoriesRouter.use("/:artistId/songs", artistSongsRouter)
+artistSongsRouter.use("/:artistId/songs", artistSongsRouter)
 
 export default artistsRouter
