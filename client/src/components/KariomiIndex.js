@@ -4,27 +4,38 @@ import catPic from '../assets/scss/images/cat.png'
 import ArtistList from "./ArtistList"
 
 const KariomiIndex = props => {
-  const [songs, setSongs] = useState([])
 
-  const getArtist = async () => {
-    try{
-      const response = await fetch('/api/v1/artist')
-      if(!response.ok) {
-        const errorMessage = `${response.status} ${response.statusText}`
-        const error = new Error(errorMessage);
-        throw(error)
+  const [artists, setArtists] = useState([])
+
+  const getArtists = async () => {
+    try {
+      const response = await fetch('/api/v1/artists')
+
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        throw new Error(errorMessage)
       }
-      const songsBody = await response.json()
-      setSongs(songsBody.songs)
-    } catch(error) {
-      console.error(`Error in fetch: ${error.message}`)
+
+      const body = await response.json()
+      setArtists(body.artists)
+    } catch (error) {
+      console.error(`Error in Fetch: ${error.message}`)
     }
   }
-  
+
   useEffect(() => {
     window.scrollTo(0, 0)
-    getSongs()
+    getArtists()
   }, [])
+
+  const artistListTiles = artists.map(artist => {
+    return (
+      <ArtistList
+        key={ artist.id }
+        artist={ artist }
+      />
+    )
+  })
 
   return (
     <div className="row background-runner">
@@ -33,7 +44,7 @@ const KariomiIndex = props => {
           <img src={catPic} className='cat-pic'/>
         </h1>
         <div>
-          <ArtistList/>
+          {artistListTiles}
         </div>
       </div>
     </div>
