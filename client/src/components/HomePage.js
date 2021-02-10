@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
 import catPic from '../assets/scss/images/cat.png'
 
 const HomePage = (props) => {
