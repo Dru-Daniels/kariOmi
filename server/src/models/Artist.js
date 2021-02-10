@@ -9,7 +9,7 @@ class Artist extends Model {
   static get jsonSchema () {
     return {
       type: 'object',
-      required: ['name'],
+      required: ['artistName'],
       properties: {
         name: { type: 'string' },
         imgUrl: { type: 'string' },
@@ -18,7 +18,7 @@ class Artist extends Model {
     }
   }
 
-  static get relationMappings () {
+  static get relationMappings() {
     const Song = require('./Song.js')
 
     return {
