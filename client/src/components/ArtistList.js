@@ -5,11 +5,11 @@ const ArtistList = (props) => {
 
   const [artist, setArtist] = useState({
     id: '',
-    name: '',
+    artistName: '',
     songs: []
   })
 
-  const artistId = props.match.params.id
+  const artistId = props.artist.id
 
   const getArtist = async () => {
     try{
@@ -41,7 +41,7 @@ const ArtistList = (props) => {
 
   return(
     <div>
-      <h1>{artist.name}</h1>
+      <h1>{artist.artistName}</h1>
       {songTiles}
     </div>
   )

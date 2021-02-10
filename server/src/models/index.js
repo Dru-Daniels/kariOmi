@@ -2,5 +2,6 @@
 const User = require("./User.js")
 const Artist = require("./Artist.js")
 const Song = require("./Song.js")
+const Performance = require("./Performance.js")
 
-module.exports = {User, Artist}
+module.exports = {User, Artist, Song, Performance}

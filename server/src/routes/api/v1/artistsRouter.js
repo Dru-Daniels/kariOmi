@@ -11,7 +11,7 @@ artistsRouter.get('/', async (req, res) => {
   try {
     const artists = await Artist.query()
     const serializedArtists = artists.map(artist => {
-      return ArtistSerializer.getSummary(artists)
+      return ArtistSerializer.getSummary(artist)
     })
     return res.status(200).json({artists: serializedArtists })
   } catch (error) {

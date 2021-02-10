@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import catPic from '../assets/scss/images/cat.png'
 import ArtistList from "./ArtistList"
 
-const KariomiIndex = props => {
+const ArtistIndex = props => {
 
   const [artists, setArtists] = useState([])
 
@@ -51,4 +51,4 @@ const KariomiIndex = props => {
   )
 }
 
-export default KariomiIndex
+export default ArtistIndex
