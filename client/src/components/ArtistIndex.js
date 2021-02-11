@@ -39,11 +39,11 @@ const ArtistIndex = props => {
 
   return (
     <div className="row background-runner">
-      <div className="small-8 small-centered columns main-container">
+      <div className="small-8 small-centered columns">
         <h1 className="text-center">KariOmi
           <img src={catPic} className='cat-pic'/>
         </h1>
-        <div>
+        <div className=''>
           {artistListTiles}
         </div>
       </div>

@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react"
+import micPic from '../assets/scss/images/mic.png'
 
 const SongTile = (props) => {
 
-  const videoSrcK = `https://www.youtube.com/embed/${props.song.karaokeVideoId}`
-  const videoSrcL = `https://www.youtube.com/embed/${props.song.lyricVideoId}`
+  const lyrics = props.song.lyrics.substring(0,40)
+
 
   return(
-    <div>
-      <h1>Hello from the Song Tile!</h1>
-      <div>
-        <div className="ui embed">
-          <iframe src={videoSrcK} allowFullScreen title="Video player" />
+    <div className="container">
+      <div className="card">
+        <div className="circle">
+          <h2><img src={micPic} className='cat-pic'/></h2>
         </div>
-        <div className="ui embed">
-          <iframe src={videoSrcL} allowFullScreen title="Video player" />
+        <div className='content'>
+          <p className='card-title'>{props.song.songTitle}</p>
+          <p>{lyrics}...</p>
+          <a href="#">Practice Song!</a>
         </div>
-        <p className='lyrics'>{props.song.lyrics}</p>
-      </div> 
+      </div>
     </div>
   )
 }
