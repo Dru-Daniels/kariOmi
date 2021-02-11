@@ -47,6 +47,7 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "dependencies": {
+    "@font-face/browser": "^1.0.2",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",
@@ -58,6 +59,7 @@
     "objection-unique": "^1.2.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "styled-components": "^5.2.1"
   }
 }

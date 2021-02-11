@@ -44,6 +44,22 @@ class User extends uniqueFunc(Model) {
 
     return serializedJson
   }
+
+  static get relationMappings() {
+    const Song = require('./Song.js')
+
+    return {
+      songs: {
+        relation: Model.HasManyRelation,
+        modelClass: Song,
+        join: {
+          from: "users.id",
+          to: "songs.userId"
+        }
+      }
+    }
+  }
+
 }
 
 module.exports = User
