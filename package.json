@@ -20,5 +20,11 @@
     "node": "^14.15",
     "yarn": "1.22.10"
   },
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "less-loader": "^8.0.0",
+    "react-awesome-slider": "^4.1.0",
+    "web-animation-club": "^0.6.0"
+  }
 }

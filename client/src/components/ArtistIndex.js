@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 
-import catPic from '../assets/scss/images/cat.png'
 import ArtistList from "./ArtistList"
 
 const ArtistIndex = props => {
@@ -38,15 +37,10 @@ const ArtistIndex = props => {
   })
 
   return (
-    <div className="row background-runner">
-      <div className="small-8 small-centered columns">
-        <h1 className="text-center">KariOmi
-          <img src={catPic} className='cat-pic'/>
-        </h1>
+    <div className="background-runner">
         <div className=''>
           {artistListTiles}
         </div>
-      </div>
     </div>
   )
 }

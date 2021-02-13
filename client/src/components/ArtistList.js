@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import SongTile from './SongTile'
-import ReactDOM from "react-dom";
-import Carousel from "react-elastic-carousel";
-
-const breakPoints = [
-  { width: 1, itemsToShow: 1 },
-  { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-  { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 4 }
-]
+import ReactDOM from "react-router-dom"
+import Carousel from "react-elastic-carousel"
 
 const ArtistList = (props) => {
-
+  
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
+    { width: 768, itemsToShow: 3 },
+    { width: 1200, itemsToShow: 4 }
+  ]
+  
   const [artist, setArtist] = useState({
     id: '',
     artistName: '',
