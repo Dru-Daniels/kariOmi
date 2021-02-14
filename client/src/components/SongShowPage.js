@@ -177,7 +177,7 @@ const SongShow = ({ user }) => {
 
       <div className='grid-x grid-margin-x grid-padding-x'>
         <div className= 'cell small-12 medium-8'>
-          <form className='form-show'>
+          <form className='form-show' onSubmit={saveNote} >
             <ErrorList errors={errors} />
             <h4 className='song-show-form-title'>
               Hey Singer, Leave some Practice Notes!
@@ -194,10 +194,9 @@ const SongShow = ({ user }) => {
             </div>
             <div>
               <input 
-                type='button' 
+                type='submit' 
                 className='button' 
                 value='Save Notes' 
-                onClick={saveNote} 
               />
             </div>
           </form>

@@ -83,78 +83,85 @@ if (shouldRedirect){
 }
 
 return(
-    <div className='form background-runner'>
+    <div className='background-runner-form'>
       <ErrorList errors={errors} />
-      <form className='main-container recipe-form' onSubmit={handleSubmit}>
-        <h1 className= 'text-center formTitle'>Add a new song!</h1>
-        <label>
-          Artist:
-          <input
-            className='input'
-            type='text'
-            name='artistName'
-            onChange={handleInputChange}
-            value={newSong.artistName}
-          />
-        </label>
+      <div className='grid-x grid-margin-x grid-padding-x'>
+        <div className= 'cell small-12 medium-8'>
+          <form className='new-song-form' onSubmit={handleSubmit}>
+            <h3 className='text-center' id="song-form-title">
+              Add a new song!
+            </h3>
+            
+            <label>
+              Artist:
+              <input
+                className='input'
+                type='text'
+                name='artistName'
+                onChange={handleInputChange}
+                value={newSong.artistName}
+              />
+            </label>
 
-        <label>
-          Song Title:
-          <select 
-            className='input'
-            name='songTitle' 
-            onChange={handleInputChange}
-            value={newSong.songTitle}>
-            <option></option>
-            <option value='Easy'>Easy</option>
-            <option value='Medium'>Medium</option>
-            <option value='Hard'>Hard</option>
-          </select>
-        </label>
+            <label>
+              Song Title:
+              <select 
+                className='input'
+                name='songTitle' 
+                onChange={handleInputChange}
+                value={newSong.songTitle}>
+                <option></option>
+                <option value='Easy'>Easy</option>
+                <option value='Medium'>Medium</option>
+                <option value='Hard'>Hard</option>
+              </select>
+            </label>
 
-        <label>
-          Pick A Karaoke Video to Save:
-          <input 
-            className='input'
-            type='text'
-            name='karaokeVideoId'
-            onChange={handleInputChange}
-            value={newSong.karaokeVideoId}
-          />
-        </label>
+            <label>
+              Pick A Karaoke Video to Save:
+              <input 
+                className='input'
+                type='text'
+                name='karaokeVideoId'
+                onChange={handleInputChange}
+                value={newSong.karaokeVideoId}
+              />
+            </label>
 
-        <label>
-          Pick A Lyric Video to Save:
-          <input 
-            className='input'
-            type='text'
-            name='lyricVideoId'
-            onChange={handleInputChange}
-            value={newSong.lyricVideoId}
-          />
-        </label>
+            <label>
+              Pick A Lyric Video to Save:
+              <input 
+                className='input'
+                type='text'
+                name='lyricVideoId'
+                onChange={handleInputChange}
+                value={newSong.lyricVideoId}
+              />
+            </label>
 
-        <label>
-          Add Song to "go-to" Song List?
-          <select 
-            className='input'
-            name='performanceReady' 
-            onChange={handleInputChange}
-            value={newSong.performanceReady}>
-            <option></option>
-            <option value='True'>Yes! It's ready!</option>
-            <option value='False'>No. Still needs some work</option>
-          </select>
-        </label>
+            <label>
+              Add Song to "go-to" Song List?
+              <select 
+                className='input'
+                name='performanceReady' 
+                onChange={handleInputChange}
+                value={newSong.performanceReady}>
+                <option></option>
+                <option value='True'>Yes! It's ready!</option>
+                <option value='False'>No. Still needs some work</option>
+              </select>
+            </label>
 
-        <div className='button-group'>
-          <input 
-            className='btn btn-primary' 
-            type='submit' 
-            value='Submit' 
-          />
-        </div>
-      </form>
+            <div>
+              <input 
+                id='primary-btn' 
+                type='submit' 
+                value='Submit' 
+              />
+            </div>
+          </form>
+         </div>
+      </div>
     </div>
   )
 }
