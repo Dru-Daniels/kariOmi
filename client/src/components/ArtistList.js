@@ -51,7 +51,7 @@ const ArtistList = (props) => {
 
   return(
     <div className="carousel-container">
-      <h2>{artist.artistName}</h2>
+      <h2 className="artist-title">{artist.artistName}</h2>
       <div>
         <Carousel breakPoints={breakPoints}>
           {songTiles}

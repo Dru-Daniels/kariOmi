@@ -45,9 +45,11 @@ const TopBar = ({ user }) => {
           <div id='hideToggle'>
             <li id='menuItem' ><Link to='/songs/new'>Add New Song!</Link></li>
           </div>
-          <h1 className='text-center'>KariOmi
-            <img src={catPic} className='cat-pic'/>
-          </h1>
+          <Link to='/'> 
+            <h1 className='text-center'>KariOmi
+              <img src={catPic} className='cat-pic'/>
+            </h1>
+          </Link>
         </ul>
       </div>
       <div className='top-bar-right'>
