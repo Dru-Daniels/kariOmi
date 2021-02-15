@@ -53,11 +53,11 @@ const SongShow = ({ user }) => {
         
         .then(res => {
           let lyrics = res.data.message.body.lyrics.lyrics_body
-          setSong({...song,
-            lyrics : lyrics
+          setSong({...song, practiceNotes: body.song.practiceNotes,
+            lyrics : lyrics 
           })
           setNewSong({...newSong,
-          lyrics : lyrics})
+          lyrics : lyrics, practiceNotes: body.song.practiceNotes})
           if(newSong.lyrics !== undefined) {
             updateSong(newSong)
           }
