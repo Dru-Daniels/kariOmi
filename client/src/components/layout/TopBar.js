@@ -43,7 +43,7 @@ const TopBar = ({ user }) => {
             <FontAwesomeIcon icon={ faBars } />
           </a>
           <div id='hideToggle'>
-            <li id='menuItem' ><Link to='/songs/new'>Add New Song!</Link></li>
+            <li id='menuItem' ><a href='/songs/new'>Add New Song!</a></li>
           </div>
           <Link to='/'> 
             <h1 className='text-center'>KariOmi

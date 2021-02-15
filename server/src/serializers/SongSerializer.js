@@ -1,5 +1,6 @@
 import PerformanceSerializer from './PerformanceSerializer.js'
 
+
 class SongSerializer {
   static async getDetails(song) {
     const allowedAttributes = [
@@ -11,7 +12,8 @@ class SongSerializer {
       "practiceNotes", 
       "performanceReady", 
       "artistId", 
-      "userId"
+      "userId",
+      'trackId'
     ]
 
     let serializedSong = {}
@@ -19,7 +21,7 @@ class SongSerializer {
     for (const attribute of allowedAttributes) {
       serializedSong[attribute] = song[attribute]
     }
-
+        
     // serializedSong.performances = await song.$relatedQuery('performances')
     // serializedSong.performances = await Promise.all(serializedSong.performances.map(performance => {
     //   return PerformanceSerializer.getDetails(performance)

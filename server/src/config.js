@@ -3,8 +3,12 @@ import getNodeEnv from "./config/getNodeEnv.js"
 import getDatabaseUrl from "./config/getDatabaseUrl.cjs"
 
 export default {
+  awsAccess: { key: process.env.AWS_ACCESS_KEY },
+  awsSecret: { key: process.env.AWS_SECRET_KEY },
+  youTubeApiKey:{ key: process.env.youTubeApiKey },
+  REACT_APP_MM_KEY:{ key: process.env.REACT_APP_MM_KEY },
+  databaseUrl: getDatabaseUrl(getNodeEnv()),
   nodeEnv: getNodeEnv(),
   session: { secret: process.env.SESSION_SECRET },
-  databaseUrl: getDatabaseUrl(getNodeEnv()),
   web: { host: process.env.HOST || "0.0.0.0", port: process.env.PORT || 3000 }
 }

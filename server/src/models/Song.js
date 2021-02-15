@@ -17,7 +17,8 @@ class Song extends Model {
         practiceNotes: {type: 'string'},
         performanceReady: {type: ['boolean', 'string']},
         artistId: {type: ['integer', 'string']},
-        userId: {type: ['integer', 'string']}
+        userId: {type: ['integer', 'string']},
+        trackId: {type: ['integer', 'string']}
       }
     }
   }

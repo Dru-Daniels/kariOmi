@@ -572,3 +572,18 @@ p {
   background: #f56201;
   color: #FFF;
 }
+
+// input button styling:
+#btn {
+  color: #fff;
+  background: #f56201;
+  border: solid 1px #f56201;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  padding: .5em 1em;;
+  border-radius: 8px;
+  width: 75%;
+  max-width: 180px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+}

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
+import axios from 'axios'
  
 import RabbitSing from '../assets/scss/images/rabbitSing.png'
 import RabbitPinkDancing from '../assets/scss/images/RabbitPinkDancing.png'
 import SmartCat from '../assets/scss/images/smartCat.png'
 
+const REACT_APP_MM_KEY='1f3681a93333f848e78152032bee26e7'
 import ErrorList from './ErrorList'
 
 const SongShow = ({ user }) => {
-  
   const [errors, setErrors] = useState({})
   const [song, setSong] = useState({})
+  const [trackId, setTrackId] = useState("")
   const [newSong, setNewSong] = useState({
     id: song.id,
     songTitle: song.songTitle,
@@ -20,7 +22,8 @@ const SongShow = ({ user }) => {
     practiceNotes: '',
     performanceReady: song.performanceReady,
     artistId: song.artistId,
-    userId: song.userId
+    userId: song.userId,
+    trackId: song.trackId
   })
 
   const breakPoints = [
@@ -43,11 +46,31 @@ const SongShow = ({ user }) => {
       }
       const body = await response.json()
       setSong(body.song)
+      let trackId= body.song.trackId
+      if (body.song.trackId != undefined) {
+          axios.get(
+          `https://cors-access-allow.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${REACT_APP_MM_KEY}`)
+        
+        .then(res => {
+          let lyrics = res.data.message.body.lyrics.lyrics_body
+          setSong({...song,
+            lyrics : lyrics
+          })
+          setNewSong({...newSong,
+          lyrics : lyrics})
+          if(newSong.lyrics !== undefined) {
+            updateSong(newSong)
+          }
+        })
+
+      }                
     } catch (error) {
       console.error(error)
       console.error(`Error in fetch ${error.message}`)
     }
   }
+  
+
   
   const updateSong = async (newSong) => {
     try {
@@ -91,10 +114,13 @@ const SongShow = ({ user }) => {
       [event.currentTarget.name]: event.currentTarget.value,
     })
   }
+
   
   useEffect(() => {
+    window.scrollTo(0, 0)
     getSong()
   }, [])
+
   
   const videoSrcK = `https://www.youtube.com/embed/${song.karaokeVideoId}`
   const videoSrcL = `https://www.youtube.com/embed/${song.lyricVideoId}`
