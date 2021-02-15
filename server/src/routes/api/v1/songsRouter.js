@@ -5,7 +5,6 @@ import { ValidationError } from 'objection'
 import { Artist } from '../../../models/index.js'
 import { Song } from '../../../models/index.js'
 import SongSerializer from '../../../serializers/SongSerializer.js'
-import LyricAdder from '../../../serializers/LyricAdder.js'
 import cleanUserInput from '../../../services/cleanUserInput.js'
 
 

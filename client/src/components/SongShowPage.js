@@ -129,6 +129,11 @@ const SongShow = ({ user }) => {
   if (song.artist !== undefined) {
     artist = song.artist.artistName
   }
+  let str
+  if(song.lyrics !== undefined) {
+    str = song.lyrics
+    str= str.slice(0, str.length - 70)
+  }
   
   return (
     <div className='grid-container' id='parent'>   
@@ -198,7 +203,7 @@ const SongShow = ({ user }) => {
 
       <h1>Lyrics Drop Herrrr.</h1>
       <div id='needtowrap'>
-          <p className='content-lyrics lyrics'>{song.lyrics}</p>
+          <p className='content-lyrics lyrics'>{str}</p>
       </div>
 
       <div className='grid-x grid-margin-x grid-padding-x'>
