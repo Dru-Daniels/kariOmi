@@ -8,9 +8,9 @@ const Track = (props) => {
   }
 
   return (
-    <div className="col-md-6">
-      <div className="card mb-4 shadow-sm">
-        <h5>{track.artist_name}</h5>
+    <div className="col-md-6" >
+      <div id='track-tile'>
+        <h5 className='text-center'>{track.artist_name}</h5>
         <p className="card-text">
           <strong><i className="fas fa-play"></i>Track</strong>: {track.track_name}
           <br/>
@@ -18,9 +18,9 @@ const Track = (props) => {
           {track.album_name}
         </p>
           <label
-            id="btn"
-            type="submit"
-            className="btn btn-dark btn-dark"
+            id="primary-btn"
+            type="button"
+            className="button"
             name="track"
             value={track}
             onClick={handleSongChoice}

@@ -77,9 +77,9 @@ const NewSongForm = (props) => {
     axios.all([
       axios.get(`https://cors-access-allow.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track_artist=${userInput}&page_size=6&page=1&s_track_rating=desc&apikey=${REACT_APP_MM_KEY}`), 
       
-      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=${karaokeQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`),
+      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=relevance&q=${karaokeQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`),
       
-      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=${lyricsQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`)
+      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=relevance&q=${lyricsQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`)
     ])
     .then(axios.spread((data1, data2, data3) => {
       let track_list = data1.data.message.body.track_list;
@@ -94,7 +94,7 @@ const NewSongForm = (props) => {
       console.log(
         'data1', data1, 
         'data2', data2, 
-        'data3', data3
+        // 'data3', data3
       ) 
     }))
   }
@@ -162,8 +162,8 @@ const NewSongForm = (props) => {
 return(
     <div className='background-runner-form'>
       <ErrorList errors={errors} />
-      <div className='grid-x grid-margin-x grid-padding-x'>
-        <div className= 'cell small-12 medium-8'>
+      <div className=''>
+        <div className= ''>
           <form className='new-song-form' onSubmit={onSubmitHandler}>
             <h3 className='text-center' id='song-form-title'>
               Search to Add A New Song!
@@ -178,21 +178,21 @@ return(
                 onChange={onChange}
               />
             </div>
-            <button className='button' type='submit'>
+            <button id="primary-btn" className='button' type='submit'>
             Get Track Lyrics
             </button>
           </form>
 
-          <form onSubmit={handleSubmit}>
+          <form className="new-song-form" onSubmit={handleSubmit}>
             <Tracks handleTrackSelect={handleTrackSelect} />
-            <h4>Karaoke Videos:</h4>
+            <h4 id='song-form-title'>Karaoke Videos:</h4>
             <div className='eleven wide column'>
               <VideoDetail video={selectedVideo1}/>
             </div>
             <div className='five wide column'>
               <VideoList handleVideoSelect={handleKaraokeVideoSelect} videos={karaokeVideos}/>
             </div>
-            <h4>Lyric Videos:</h4>
+            <h4 id='song-form-title'>Lyric Videos:</h4>
             <div className='eleven wide column'>
               <VideoDetail video={selectedVideo2}/>
             </div>
