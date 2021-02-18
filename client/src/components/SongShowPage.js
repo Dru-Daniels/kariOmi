@@ -12,7 +12,6 @@ import ErrorList from './ErrorList'
 const SongShow = ({ user }) => {
   const [errors, setErrors] = useState({})
   const [song, setSong] = useState({})
-  const [trackId, setTrackId] = useState("")
   const [newSong, setNewSong] = useState({
     id: song.id,
     songTitle: song.songTitle,
@@ -70,8 +69,6 @@ const SongShow = ({ user }) => {
     }
   }
   
-
-  
   const updateSong = async (newSong) => {
     try {
       const response = await fetch(`/api/v1/songs/${id}`, {
@@ -114,14 +111,12 @@ const SongShow = ({ user }) => {
       [event.currentTarget.name]: event.currentTarget.value,
     })
   }
-
   
   useEffect(() => {
     window.scrollTo(0, 0)
     getSong()
   }, [])
 
-  
   const videoSrcK = `https://www.youtube.com/embed/${song.karaokeVideoId}`
   const videoSrcL = `https://www.youtube.com/embed/${song.lyricVideoId}`
   
@@ -213,10 +208,12 @@ const SongShow = ({ user }) => {
             <h4 className='song-show-form-title'>
               Hey Singer, Leave some Practice Notes!
             </h4>
-            <p>{song.practiceNotes}</p>
+            
             <div className='button-group'>
-              <input 
+              <textarea 
+                rows="3"
                 type='text' 
+                className='input'
                 name='practiceNotes' 
                 value={newSong.practiceNotes} 
                 onChange={handleInputChange} 
@@ -225,12 +222,14 @@ const SongShow = ({ user }) => {
             </div>
             <div>
               <input 
+                id='primary-btn'
                 type='submit' 
                 className='button' 
                 value='Save Notes' 
               />
             </div>
           </form>
+          <p className='show-notes-style'>{song.practiceNotes}</p>
           <img className='smart-cat-show' src={SmartCat}/>
         </div>
       </div>
@@ -238,7 +237,5 @@ const SongShow = ({ user }) => {
     </div>
   )
 }
-
-
 
 export default SongShow
