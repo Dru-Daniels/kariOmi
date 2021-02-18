@@ -1,6 +1,5 @@
 import PerformanceSerializer from './PerformanceSerializer.js'
 
-
 class SongSerializer {
   static async getDetails(song) {
     const allowedAttributes = [
@@ -21,11 +20,28 @@ class SongSerializer {
     for (const attribute of allowedAttributes) {
       serializedSong[attribute] = song[attribute]
     }
-        
-    // serializedSong.performances = await song.$relatedQuery('performances')
-    // serializedSong.performances = await Promise.all(serializedSong.performances.map(performance => {
-    //   return PerformanceSerializer.getDetails(performance)
-    // }))
+
+    const performances = await song.$relatedQuery("performances")
+
+    serializedSong.performances = await Promise.all(
+      performances.map(performance => {
+        return PerformanceSerializer.getPerformanceDetails(performance)
+      })
+    )
+   
+    return serializedSong
+  }
+
+  static async getSongStats(song) {
+    const serializedSong = this.getDetails(song)
+
+    const performances = await song.$relatedQuery("performances")
+    
+    serializedSong.performances = await Promise.all(
+      performances.map(performance => {
+        return PerformanceSerializer.getPerformanceDetails(performance)
+      })
+      )
 
     return serializedSong
   }

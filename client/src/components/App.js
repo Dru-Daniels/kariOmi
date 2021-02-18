@@ -4,7 +4,6 @@ import { hot } from 'react-hot-loader/root'
 import AuthenticatedRoute from './authentication/AuthenticatedRoute'
 import { ContextController } from '../context'
 
-
 import '../assets/scss/main.scss'
 
 import getCurrentUser from '../services/getCurrentUser'
@@ -12,6 +11,7 @@ import RegistrationForm from './registration/RegistrationForm'
 import SignInForm from './authentication/SignInForm'
 import TopBar from './layout/TopBar'
 import ArtistIndex from './ArtistIndex'
+import GoToList from './GoToList'
 import SongShow from './SongShowPage'
 import HomePage from './HomePage'
 import NewSongForm from './NewSongForm'
@@ -38,6 +38,7 @@ const App = (props) => {
         <Switch>
           <Route exact path='/' component={HomePage}/>
           <AuthenticatedRoute exact path='/artists' component={ ArtistIndex } user={currentUser}/>
+          <AuthenticatedRoute exact path='/go-tos' component={ GoToList } user={currentUser} />
           <Route exact path='/users/new' component={RegistrationForm} />
           <Route exact path='/user-sessions/new' component={SignInForm} />
           <AuthenticatedRoute exact path='/songs/new' component={NewSongForm} user={currentUser}/>

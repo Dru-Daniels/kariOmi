@@ -24,7 +24,7 @@ class Song extends Model {
   }
 
   static get relationMappings() {
-    const { Artist, User } = require('./index.js')
+    const { Artist, User, Performance } = require('./index.js')
 
     return {
       artist: {
@@ -42,6 +42,14 @@ class Song extends Model {
           from: 'songs.artistsId',
           to: 'users.id'
         } 
+      },
+      performances: {
+        relation: Model.HasManyRelation,
+        modelClass: Performance,
+        join: {
+          from: 'songs.id',
+          to: 'performances.songId'
+        }
       }
     }
   }

@@ -8,7 +8,7 @@ class Performance extends Model {
   static get jsonSchema(){
     return {
       type: 'object',
-      required: ['userId', 'songId', 'stagePresence', 'vocalPerformance', 'numOfDrinks', 'audienceReaction'],
+      required: ['userId', 'songId'],
       properties: {
         userId: { type: ['integer', 'string']},
         songId: { type: ['integer', 'string']},

@@ -1,16 +1,32 @@
 import express from 'express'
 import { ValidationError } from 'objection'
 
-// import songPerformancesRouter from './songPerformancesRouter.js'
+import songPerformancesRouter from './songPerformancesRouter.js'
 import { Artist } from '../../../models/index.js'
 import { Song } from '../../../models/index.js'
 import SongSerializer from '../../../serializers/SongSerializer.js'
 import cleanUserInput from '../../../services/cleanUserInput.js'
 
-
 const songsRouter = new express.Router()
 
-// songsRouter.use('/:songId/performances', songPerformancesRouter)
+songsRouter.use('/:songId/performances', songPerformancesRouter)
+
+songsRouter.get("/", async (req, res) => {
+  try {
+    const songs = await Song.query()
+
+    const serializedSongs = []
+
+    for (const song of songs) {
+      const serializedSong = await SongSerializer.getSongStats(song)
+      serializedSongs.push(serializedSong)
+    }
+    return res.status(200).json({ songs: serializedSongs })
+  } catch(error){
+    console.log(error)
+    return res.status(500).json({ errors: error })
+  }
+})
 
 songsRouter.get('/:id', async (req, res) => {
   const { id } = req.params
@@ -40,9 +56,7 @@ songsRouter.patch('/:id', async (req, res) => {
   }
 })
 
-
 songsRouter.post('/', async (req, res) => {
-  // debugger
   let { body } = req
   let formInput = cleanUserInput(body)
   // let { karaokeVideoId, lyricVideoId, lyrics, practiceNotes, performanceReady } = formInput
