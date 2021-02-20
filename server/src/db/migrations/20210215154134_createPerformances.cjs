@@ -14,7 +14,7 @@ exports.up = async (knex) => {
     table.integer('numOfDrinks')
     table.string('venue')
     table.text('notes')
-    table.string('videoFile')
+    table.text('videoFile')
     table.bigInteger('userId').notNullable().unsigned().index().references('users.id')
     table.bigInteger('songId').notNullable().unsigned().index().references('songs.id')
     table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())

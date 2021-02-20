@@ -6,7 +6,8 @@ import RatingForm from './RatingForm'
 const GoToSong = ({song}) => {
 
   const [performances, setPerformances] = useState([])
-  const [overAllSongScore, setOverAllSongScore] = useState(0)
+  const [overAllSongScore, setOverAllSongScore] = useState([])
+  const [errors, setErrors] = useState({})
   
   const getPerformances = async () => {
     try {
@@ -19,23 +20,21 @@ const GoToSong = ({song}) => {
       }
       const body = await response.json()
       setPerformances(body.performances)
-      if (body.overAllSongScore !== NaN) {
-        setOverAllSongScore(body.overAllSongScore)
-      }
+      setOverAllSongScore(body.overAllSongScore)
     } catch (error) {
       console.error(error)
       console.error(`Error in fetch ${error.message}`)
     }
   }
 
-  const postNewPerformance = async (newPerformance) => {
+  const postNewPerformance = async (formPayload) => {
     try {
       const response = await fetch(`/api/v1/songs/${song.id}/performances`, {
         method: "POST",
         headers: new Headers({
-          "Content-Type": "application/json"
+          "Accept": "video/mp4"
         }),
-        body: JSON.stringify(newPerformance)
+        body: formPayload
       })
       if (!response.ok) {
         if (response.status === 422) {
@@ -50,9 +49,8 @@ const GoToSong = ({song}) => {
       } else {
         const body = await response.json()
         setPerformances(body.performances)
-        if (body.overAllSongScore !== NaN) {
-          setOverAllSongScore(body.overAllSongScore)
-        }
+        setOverAllSongScore(overAllSongScore)
+        
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -94,14 +92,17 @@ const GoToSong = ({song}) => {
     getPerformances()
   }, [])
 
+  let songScore = overAllSongScore
+  songScore = (isNaN(songScore) ? 'NA' : songScore)
+
   return (
     <div>
-      <h4 >Song Score: </h4>
+      <h4 className='rating-card-titles' >Song Score: </h4>
         <div id='song-score'>
-          <span><p className='song-score-num'>{overAllSongScore}</p></span>
+          <span><p className='song-score-num'>{songScore}</p></span>
         </div>
 
-      <h4>Past Performances:</h4>
+      <h4 className='rating-card-titles'> Memories:</h4>
           {performanceList}
 
         <div className='text-right'>

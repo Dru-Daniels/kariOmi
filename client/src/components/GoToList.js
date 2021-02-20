@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import starCat from '../assets/scss/images/starCat.png'
 
 import GoToSong from './GoToSong'
 import GoToChart from './GoToChart'
@@ -30,6 +31,9 @@ const GoToList = (props) =>  {
       console.error(`Error in fetch ${error.message}`)
     }
   }
+  
+  
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -39,7 +43,7 @@ const GoToList = (props) =>  {
   let goToSongList = songs.map((song, i) => {
     if (song.performanceReady === true) {
       return (
-        <Panel header={song.songTitle} key={song.id}>
+        <Panel header={song.songTitle} key={song.id}>  
           < GoToSong 
             key={song.id}
             song={song}
@@ -48,17 +52,21 @@ const GoToList = (props) =>  {
       )
     }
   })
-    return (
-      <div className="background-runner-form">
-        <div className='go-to-list-container'>
-          <h1 className='go-to-title'>Go-Tos: Sing Me!</h1>
+  
+  return (
+    <div className='body-accent'>
+      <div className="background-runner-form background-runner-accent">
+        <div className='go-to-list-container '>
+          <h1 className='go-to-title text-center'>Go-Tos: Sing Me!</h1>
           {/* <GoToChart/> */}
-          <Collapse onChange={callback} id='go-to-drop-down'>
-            {goToSongList}
-          </Collapse>
+            <Collapse onChange={callback} id='go-to-drop-down'>
+              {goToSongList}
+            </Collapse>
         </div>
+        <img className='song-show-item pic' src={starCat}/>
       </div>
-    )
+    </div>
+  )
 }
 
 export default GoToList

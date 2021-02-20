@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 import ErrorList from './ErrorList.js'
 import translateServerErrors from './../services/translateServerErrors.js'
+import earPhoneCat from '../assets/scss/images/pandaHeadphones.png'
+
 
 import axios from 'axios'
 import { Context } from '../context'
@@ -90,12 +92,6 @@ const NewSongForm = (props) => {
 
       let lyricVideos = data3.data.items
       setLyricVideos(lyricVideos)
-
-      console.log(
-        'data1', data1, 
-        'data2', data2, 
-        // 'data3', data3
-      ) 
     }))
   }
 
@@ -160,14 +156,15 @@ const NewSongForm = (props) => {
   }
 
 return(
-    <div className='background-runner-form'>
+  <div id='body-accent'>
+    <div className='background-runner-form background-runner-accent'>
       <ErrorList errors={errors} />
       <div className=''>
         <div className= ''>
           <form className='new-song-form' onSubmit={onSubmitHandler}>
-            <h3 className='text-center' id='song-form-title'>
+            <h1 className='text-center' id='song-form-title-main'>
               Search to Add A New Song!
-            </h3>
+            </h1>
             <div className='form-group'>
               <input
                 type='text'
@@ -192,6 +189,9 @@ return(
             <div className='five wide column'>
               <VideoList handleVideoSelect={handleKaraokeVideoSelect} videos={karaokeVideos}/>
             </div>
+            <span className='song-show-item pic'>
+              <img className='panda' src={earPhoneCat}/>
+            </span>
             <h4 id='song-form-title'>Lyric Videos:</h4>
             <div className='eleven wide column'>
               <VideoDetail video={selectedVideo2}/>
@@ -222,10 +222,10 @@ return(
               />
             </div>
           </form>
-
         </div>
       </div>
     </div>
+  </div>
   )
 }
 export default NewSongForm
