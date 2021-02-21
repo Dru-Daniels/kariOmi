@@ -4,7 +4,8 @@ import micPic from '../assets/scss/images/mic.png'
 
 const SongTile = (props) => {
 
-  const lyrics = props.song.lyrics.substring(0,40)
+  const lyrics = props.song.lyrics.substring(0,48)
+  const songtitle = props.song.songTitle.substring(0,41)
 
   return(
     <div className="container">
@@ -13,7 +14,7 @@ const SongTile = (props) => {
           <h2><img src={micPic} className='cat-pic'/></h2>
         </div>
         <div className='content'>
-          <p className='card-title'>{props.song.songTitle}</p>
+          <p className='card-title'>{songtitle}</p>
           <p>{lyrics}...</p>
           <Link  className="song-tile-link"to={`/songs/${props.song.id}`}>
             Practice Song!

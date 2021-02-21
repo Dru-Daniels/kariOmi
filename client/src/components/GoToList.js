@@ -31,9 +31,6 @@ const GoToList = (props) =>  {
       console.error(`Error in fetch ${error.message}`)
     }
   }
-  
-  
-
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -63,7 +60,7 @@ const GoToList = (props) =>  {
               {goToSongList}
             </Collapse>
         </div>
-        <img className='song-show-item pic' src={starCat}/>
+        <img className='song-show-item pic star-cat' src={starCat}/>
       </div>
     </div>
   )

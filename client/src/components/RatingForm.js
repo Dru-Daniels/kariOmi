@@ -104,7 +104,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
                       onClick={handleInputChange}
                       />
                     <FaFireAlt
-                      className='star'
+                      className='rating-icon'
                       color={ratingValue <= (hover.One || performance.stagePresence) ? '#f56201' : '#e4e5e9'}
                       size={16}
                       onMouseEnter={() => setHover({...hover, One: ratingValue})}
@@ -131,7 +131,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
                     onClick={handleInputChange}
                     />
                   <FaStar
-                    className='star'
+                    className='rating-icon'
                     color={ratingValue <= (hover.Two || performance.vocalPerformance) ? '#f6d633' : '#e4e5e9'}
                     size={16}
                     onMouseEnter={() => setHover({...hover, Two: ratingValue})}
@@ -158,7 +158,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
                     onClick={handleInputChange}
                     />
                   <FaThumbsUp
-                    className='star'
+                    className='rating-icon'
                     color={ratingValue <= (hover.Three || performance.audienceReaction) ? '#f20c90' : '#e4e5e9'}
                     size={16}
                     onMouseEnter={() => setHover({...hover, Three: ratingValue})}
@@ -185,7 +185,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
                     onClick={handleInputChange}
                     />
                   <FaBeer
-                    className='star'
+                    className='rating-icon'
                     color={ratingValue <= (hover.Four || performance.numOfDrinks) ? '#6f84d1' : '#e4e5e9'}
                     size={16}
                     onMouseEnter={() => setHover({...hover, Four: ratingValue})}
@@ -230,7 +230,6 @@ const RatingForm = ({songId, postNewPerformance}) => {
           onDrop={handleFileUpload} 
           className='drop-zone'
           multiple={false}
-          // style={dropzoneStyle}
         >
           {({getRootProps, getInputProps}) => (
             <section  style={dropzoneStyle} >

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import SongTile from './SongTile'
-import ReactDOM from "react-router-dom"
 import Carousel from "react-elastic-carousel"
 
 const ArtistList = (props) => {
@@ -48,7 +47,6 @@ const ArtistList = (props) => {
       />
     )
   })
-
   return(
     <div className="carousel-container">
       <h2 className="artist-title">{artist.artistName}</h2>

@@ -1,36 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 import { useParams } from 'react-router'
-import axios from 'axios'
- 
+
 import RabbitSing from '../assets/scss/images/rabbitSing.png'
 import RabbitPinkDancing from '../assets/scss/images/RabbitPinkDancing.png'
 import SmartCat from '../assets/scss/images/smartCat.png'
 
-const REACT_APP_MM_KEY='1f3681a93333f848e78152032bee26e7'
+import ToggleSwitch from "./layout/ToggleSwitch"
 import ErrorList from './ErrorList'
 
 const SongShow = ({ user }) => {
   const [errors, setErrors] = useState({})
   const [song, setSong] = useState({})
-  const [newSong, setNewSong] = useState({
-    id: song.id,
-    songTitle: song.songTitle,
-    karaokeVideoId: song.karaokeVideoId,
-    lyricVideoId: song.lyrics,
-    lyrics: song.lyrics,
-    practiceNotes: '',
-    performanceReady: song.performanceReady,
-    artistId: song.artistId,
-    userId: song.userId,
-    trackId: song.trackId
-  })
-
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 1},
-    { width: 768, itemsToShow: 1 },
-    { width: 1200, itemsToShow: 1 }
-  ]
+  const [newSong, setNewSong] = useState({})
   
   const { id } = useParams()
 
@@ -45,6 +26,8 @@ const SongShow = ({ user }) => {
       }
       const body = await response.json()
       setSong(body.song)
+      setNewSong(body.song)
+
       let trackId= body.song.trackId
       if (body.song.trackId != undefined) {
           axios.get(
@@ -111,7 +94,7 @@ const SongShow = ({ user }) => {
       [event.currentTarget.name]: event.currentTarget.value,
     })
   }
-  
+
   useEffect(() => {
     window.scrollTo(0, 0)
     getSong()
@@ -130,8 +113,16 @@ const SongShow = ({ user }) => {
     str= str.slice(0, str.length - 70)
   }
   
+  const onCheckedChange = (checked) => {
+    setNewSong({...newSong, 
+      performanceReady: checked});
+    updateSong({...newSong, 
+      performanceReady: checked})
+  }
+
   return (
-    <div className='grid-container' id='parent'>   
+    <div className='grid-container' id='parent'> 
+      <ToggleSwitch id="checked" checked={ newSong.performanceReady } onChange={ onCheckedChange }/>  
       <h1 className='title-song-show'>Time to Practice!</h1>
       <div className='flex' >
         <div className='song-show-container'>
@@ -195,14 +186,15 @@ const SongShow = ({ user }) => {
           </div>
         </div>
       </div>
-
+      
       <h1>Lyrics Drop Herrrr.</h1>
       <div id='needtowrap'>
           <p className='content-lyrics lyrics'>{str}</p>
       </div>
 
+      <h1>Check Your Progress!</h1>
       <div className='grid-x grid-margin-x grid-padding-x'>
-        <div className= 'cell small-12 medium-8'>
+        <div className= 'cell small-12 medium-8'>      
           <form className='form-show' onSubmit={saveNote} >
             <ErrorList errors={errors} />
             <h4 className='song-show-form-title'>
@@ -228,9 +220,9 @@ const SongShow = ({ user }) => {
                 value='Save Notes' 
               />
             </div>
-          </form>
           <p className='show-notes-style'>{song.practiceNotes}</p>
           <img className='smart-cat-show' src={SmartCat}/>
+        </form>
         </div>
       </div>
 
