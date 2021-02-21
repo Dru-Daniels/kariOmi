@@ -20,14 +20,6 @@ class SongSerializer {
     for (const attribute of allowedAttributes) {
       serializedSong[attribute] = song[attribute]
     }
-
-    const performances = await song.$relatedQuery("performances")
-
-    serializedSong.performances = await Promise.all(
-      performances.map(performance => {
-        return PerformanceSerializer.getPerformanceDetails(performance)
-      })
-    )
    
     return serializedSong
   }

@@ -14,6 +14,7 @@ AWS.config.update({
 const s3 = new AWS.S3()
 
 const uploadImage = multer({
+
   storage: multerS3({
     acl: "public-read",
     s3: s3,

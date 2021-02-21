@@ -27,25 +27,7 @@ const SongShow = ({ user }) => {
       const body = await response.json()
       setSong(body.song)
       setNewSong(body.song)
-
-      let trackId= body.song.trackId
-      if (body.song.trackId != undefined) {
-          axios.get(
-          `https://cors-access-allow.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${REACT_APP_MM_KEY}`)
-        
-        .then(res => {
-          let lyrics = res.data.message.body.lyrics.lyrics_body
-          setSong({...song, practiceNotes: body.song.practiceNotes,
-            lyrics : lyrics 
-          })
-          setNewSong({...newSong,
-          lyrics : lyrics, practiceNotes: body.song.practiceNotes})
-          if(newSong.lyrics !== undefined) {
-            updateSong(newSong)
-          }
-        })
-
-      }                
+      
     } catch (error) {
       console.error(error)
       console.error(`Error in fetch ${error.message}`)
@@ -108,9 +90,12 @@ const SongShow = ({ user }) => {
     artist = song.artist.artistName
   }
   let str
+  
   if(song.lyrics !== undefined) {
     str = song.lyrics
     str= str.slice(0, str.length - 70)
+  } else {
+    str = "Sorry, lyrics aren't available for this song"
   }
   
   const onCheckedChange = (checked) => {

@@ -4,22 +4,19 @@ import ErrorList from './ErrorList.js'
 import translateServerErrors from './../services/translateServerErrors.js'
 import earPhoneCat from '../assets/scss/images/pandaHeadphones.png'
 
-
-import axios from 'axios'
 import { Context } from '../context'
 
 import VideoList from './youtubeFolder/VideoList'
 import VideoDetail from './youtubeFolder/VideoDetail'
 import Tracks from './tracksFolder/Tracks'
 
-const REACT_APP_MM_KEY='1f3681a93333f848e78152032bee26e7'
-const youTubeApiKey= 'AIzaSyCQtsJusuh_nPm_rdRZ8zUdY5uCFErIa7Q'
+
 
 const NewSongForm = (props) => {
 
   const [state, setState] = useContext(Context)
-  const [userInput, setUserInput] = useState('')
-  const [trackTitle, setTrackTitle] = useState('')
+  const [userInput, setUserInput] = useState("")
+  const [trackTitle, setTrackTitle] = useState("")
 
   const [karaokeVideos, setKaraokeVideos] = useState([])
   const [selectedVideo1, setSelectedVideo1] = useState(null)
@@ -34,12 +31,44 @@ const NewSongForm = (props) => {
   const [newSongId, setNewSongId] = useState('')
   const [formData, setFormData] = useState({
     track: {},
-    karaokeVideoId: '',
-    lyricVideoId: '',
+    karaokeVideoId: "",
+    lyricVideoId: "",
     practiceNotes: 'None Yet...Add me! :D',
     lyrics: 'unavailable',
     performanceReady: false
   })
+
+  const getSongData = async (userInput) => {
+    try {
+      const response = await fetch(`/api/v1/new-songs?query=${userInput}`, {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    })
+    if (!response.ok) {
+      if(response.status === 422) {
+        const body = await response.json()
+        const newErrors = translateServerErrors(body.errors)
+        return setErrors(newErrors)
+      } else {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw(error)
+        }
+      } else {
+        const body = await response.json()
+        const track_list = body.trackResults.message.body.track_list
+        const karaoke = body.karaokeResults.items
+        const lyrics = body.lyricResults.items
+        setState({ track_list: track_list, heading: 'Click the best Fit!' });
+        setKaraokeVideos(karaoke)
+        setLyricVideos(lyrics)
+      }
+    } catch (error) {
+      console.error(`Error in Fetch: ${error.message}`)
+    }
+  }
 
   const addNewSong = async (formData) => {
     try {
@@ -73,27 +102,27 @@ const NewSongForm = (props) => {
     }
   }
 
-  const getSongData = (userInput) => {
-    let karaokeQuery = `karaoke ${userInput}`
-    let lyricsQuery = `lyric video ${userInput}`
-    axios.all([
-      axios.get(`https://cors-access-allow.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track_artist=${userInput}&page_size=6&page=1&s_track_rating=desc&apikey=${REACT_APP_MM_KEY}`), 
+  // const getSongData = (userInput) => {
+  //   let karaokeQuery = `karaoke ${userInput}`
+  //   let lyricsQuery = `lyric video ${userInput}`
+  //   axios.all([
+  //     axios.get(`https://cors-access-allow.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track_artist=${userInput}&page_size=6&page=1&s_track_rating=desc&apikey=${REACT_APP_MM_KEY}`), 
       
-      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=relevance&q=${karaokeQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`),
+  //     axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=relevance&q=${karaokeQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`),
       
-      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=relevance&q=${lyricsQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`)
-    ])
-    .then(axios.spread((data1, data2, data3) => {
-      let track_list = data1.data.message.body.track_list;
-      setState({ track_list: track_list, heading: 'Click the best Fit!' });
+  //     axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=relevance&q=${lyricsQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`)
+  //   ])
+  //   .then(axios.spread((data1, data2, data3) => {
+  //     let track_list = data1.data.message.body.track_list;
+  //     setState({ track_list: track_list, heading: 'Click the best Fit!' });
     
-      let karaokeVideos = data2.data.items
-      setKaraokeVideos(karaokeVideos)
+  //     let karaokeVideos = data2.data.items
+  //     setKaraokeVideos(karaokeVideos)
 
-      let lyricVideos = data3.data.items
-      setLyricVideos(lyricVideos)
-    }))
-  }
+  //     let lyricVideos = data3.data.items
+  //     setLyricVideos(lyricVideos)
+  //   }))
+  // }
 
   useEffect(() => {
   }, [trackTitle])
@@ -157,7 +186,7 @@ const NewSongForm = (props) => {
 
 return(
   <div id='body-accent'>
-    <div className='background-runner-form background-runner-accent'>
+    <div className='background-runner-form'>
       <ErrorList errors={errors} />
       <div className=''>
         <div className= ''>
@@ -175,12 +204,12 @@ return(
                 onChange={onChange}
               />
             </div>
-            <button id="primary-btn" className='button' type='submit'>
+            <button id='primary-btn' className='button' type='submit'>
             Get Track Lyrics
             </button>
           </form>
 
-          <form className="new-song-form" onSubmit={handleSubmit}>
+          <form className='new-song-form' onSubmit={handleSubmit}>
             <Tracks handleTrackSelect={handleTrackSelect} />
             <h4 id='song-form-title'>Karaoke Videos:</h4>
             <div className='eleven wide column'>
@@ -201,7 +230,7 @@ return(
             </div>
           
             <label>
-              <h4 id='song-form-title'>Do you want this song on your "go-to" performance list?!</h4>
+              <h4 id='song-form-title'>Do you want this song on your 'go-to' performance list?!</h4>
               <select 
                 className='input'
                 name='performanceReady' 
@@ -224,8 +253,9 @@ return(
           </form>
         </div>
       </div>
+      </div>
     </div>
-  </div>
   )
 }
+
 export default NewSongForm
