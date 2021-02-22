@@ -33,10 +33,11 @@ const PerformanceTile = ({ performance, performanceDelete }) => {
   )
 
   performance.createdAt = performance.createdAt.substring(0, 10)
- 
+  const title = `Rating: ${performance.performanceScore}`
+
   return (
     <div style={{ whiteSpace: 'wrap', color: '#ff7a45'  }}  className='popover-div'>
-      <Popover content={content} title="Ratings:" trigger="hover">
+      <Popover content={content} title={title} trigger="hover">
           <Button >{performance.createdAt} - {performance.venue}</Button>
       </Popover> 
       <Popconfirm 

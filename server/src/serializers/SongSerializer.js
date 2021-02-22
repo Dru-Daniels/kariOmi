@@ -28,10 +28,9 @@ class SongSerializer {
 
     const serializedSong = this.getDetails(song)
     const performances = await song.$relatedQuery("performances")
-    debugger
 
     const serializedPerformances = [] 
-    if (performances != undefined) {
+    if (performances.length != 0) {
       for (const performance of performances) {
         const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
         serializedPerformances.push(serializedPerformance)

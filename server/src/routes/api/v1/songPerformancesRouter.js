@@ -22,7 +22,7 @@ songPerformancesRouter.get('/', async (req, res) => {
     for (const performance of performances) {
       const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
       serializedPerformances.push(serializedPerformance)
-      scores.push(parseFloat(serializedPerformance.overAllPerformanceScore))
+      scores.push(parseFloat(serializedPerformance.performanceScore))
     }
     let length = scores.length
     let total = scores.reduce((a,b) => a + b, 0)
@@ -47,12 +47,12 @@ songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) =
     venue, 
     notes, 
   } = formInput
- 
+
+  const performanceScore = (parseFloat(stagePresence) + parseFloat(vocalPerformance) + parseFloat(audienceReaction)) / 3 
   let videoFile
   if (req.file === undefined) {
     videoFile = " "
   } else {
-    debugger
     videoFile = req.file.location
   }
 
@@ -66,7 +66,8 @@ songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) =
       notes, 
       videoFile, 
       songId, 
-      userId 
+      userId,
+      performanceScore
     })
     const song = await Song.query().findById(songId)
     const performances = await song.$relatedQuery("performances")
@@ -76,7 +77,7 @@ songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) =
     for (const performance of performances) {
       const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
       serializedPerformances.push(serializedPerformance)
-      scores.push(parseFloat(serializedPerformance.overAllPerformanceScore))
+      scores.push(parseFloat(serializedPerformance.performanceScore))
     }
     let length = scores.length
     let total = scores.reduce((a,b) => a + b, 0)

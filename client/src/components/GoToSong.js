@@ -72,7 +72,7 @@ const GoToSong = ({song}) => {
           throw new Error(errorMessage)
         }
           const body = await response.json()
-          setPerformances(body.performances)
+          getPerformances()
           setErrors({})
           return true
       } catch (error) {
