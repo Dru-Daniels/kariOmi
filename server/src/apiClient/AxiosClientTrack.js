@@ -21,21 +21,19 @@ class AxiosClientTrack {
 
   static async searchLyrics(trackId) {
     try {
-      let lyrics = 'unavailable'
+      let lyrics
       const url = `http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${REACT_APP_MM_KEY}`
       const response = await got(url)
-      if (!response.ok) {
-        lyrics = 'unavailable'
-      } else {
-        const responseBody = response.body
-        const parsedSongLyricsBody = JSON.parse(responseBody)
-        lyrics = parsedSongLyricsBody.message.body.lyrics.lyrics_body
-      }
+      const responseBody = response.body
+      const parsedSongLyricsBody = JSON.parse(responseBody)
+      lyrics = parsedSongLyricsBody.message.body.lyrics.lyrics_body
       return lyrics
+    
     } catch {
-      lyrics = 'unavailable' 
-      return lyrics
+      console.log('unavailable')
+      lyrics = 'unavailable'
     }
+    return lyrics
   }
   
 }

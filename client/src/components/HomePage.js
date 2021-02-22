@@ -12,13 +12,19 @@ const HomePage = (props) => {
       <div className='home-pg-btn-container'>
         </div>
         <div className='input' id="home-page-btn" >          
-          <Link to='/songs/new' style={{ color: '#5A54D1' }}><h5>Add a New Song</h5></Link>          
+          <Link to='/songs/new' style={{ color: '#5A54D1' }}>
+            <h5 className='hm-btn'>Add a New Song</h5>
+          </Link>          
         </div>
         <div className='input' id="home-page-btn" >          
-          <Link to='/artists'  style={{ color: '#5A54D1' }}><h5>Go to your Practice Pad </h5></Link>         
+          <Link to='/artists'  style={{ color: '#5A54D1' }}>
+            <h5 className='hm-btn'>Go to your Practice Pad </h5>
+          </Link>         
         </div>
         <div className="input" id="home-page-btn" >
-          <Link to='/go-tos' style={{ color: '#5A54D1' }}><h5>See my "Go-Tos" List!</h5></Link>          
+          <Link to='/go-tos' style={{ color: '#5A54D1' }}>
+            <h5 className='hm-btn'>See my "Go-Tos" List!</h5>
+          </Link>          
         </div>
       </div>
     </div>

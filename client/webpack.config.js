@@ -4,6 +4,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+
 const isDevelopment = ["development", "test", "e2e"].includes(
   process.env.NODE_ENV || "development"
 );
@@ -45,7 +46,7 @@ module.exports = {
         loader: "file-loader",
       },
       {
-        test: /\.module\.(c|sa|sc)ss$/,
+        test: /\.module\.s(a|c)ss$/,
         use: [
           isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
           {
@@ -66,8 +67,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.(c|sa|sc)ss$/,
-        exclude: /\.module.((c|sa|sc)ss)$/,
+        test: /\.s(a|c)ss$/,
+        exclude: /\.module.(s(a|c)ss)$/,
         use: [
           isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
           "css-loader",
@@ -87,7 +88,7 @@ module.exports = {
       "@Components": path.resolve(__dirname, "src/components/"),
       "@Providers": path.resolve(__dirname, "src/providers/"),
     },
-    extensions: ["*", ".js", ".scss", ".css"],
+    extensions: ["*", ".js", ".scss"],
   },
   output: {
     path: path.resolve(__dirname, "../server/public/dist"),

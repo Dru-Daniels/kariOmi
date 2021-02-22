@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@hot-loader/react-dom": "~16.13",
+    "html-webpack-plugin": "^5.2.0",
     "webpack-dev-server": "~3.11"
   },
   "dependencies": {

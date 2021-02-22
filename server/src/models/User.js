@@ -46,7 +46,7 @@ class User extends uniqueFunc(Model) {
   }
 
   static get relationMappings() {
-    const { Song, Performance } = require('index.js')
+    const { Song, Performance } = require('./index.js')
 
     return {
       songs: {
