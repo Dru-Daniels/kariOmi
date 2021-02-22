@@ -10,8 +10,6 @@ import VideoList from './youtubeFolder/VideoList'
 import VideoDetail from './youtubeFolder/VideoDetail'
 import Tracks from './tracksFolder/Tracks'
 
-
-
 const NewSongForm = (props) => {
 
   const [state, setState] = useContext(Context)
@@ -102,28 +100,6 @@ const NewSongForm = (props) => {
     }
   }
 
-  // const getSongData = (userInput) => {
-  //   let karaokeQuery = `karaoke ${userInput}`
-  //   let lyricsQuery = `lyric video ${userInput}`
-  //   axios.all([
-  //     axios.get(`https://cors-access-allow.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track_artist=${userInput}&page_size=6&page=1&s_track_rating=desc&apikey=${REACT_APP_MM_KEY}`), 
-      
-  //     axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=relevance&q=${karaokeQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`),
-      
-  //     axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=relevance&q=${lyricsQuery}&type=video&videoDefinition=high&key=${youTubeApiKey}`)
-  //   ])
-  //   .then(axios.spread((data1, data2, data3) => {
-  //     let track_list = data1.data.message.body.track_list;
-  //     setState({ track_list: track_list, heading: 'Click the best Fit!' });
-    
-  //     let karaokeVideos = data2.data.items
-  //     setKaraokeVideos(karaokeVideos)
-
-  //     let lyricVideos = data3.data.items
-  //     setLyricVideos(lyricVideos)
-  //   }))
-  // }
-
   useEffect(() => {
   }, [trackTitle])
   
@@ -149,6 +125,10 @@ const NewSongForm = (props) => {
       practiceNotes: 'None Yet...Add me! :D',
       lyrics: 'unavailable',
       performanceReady: false
+    })
+    setState({
+      track_list: [],
+      heading: ''
     })
   }
 

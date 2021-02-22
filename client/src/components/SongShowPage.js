@@ -89,9 +89,10 @@ const SongShow = ({ user }) => {
   if (song.artist !== undefined) {
     artist = song.artist.artistName
   }
+
+
   let str
-  
-  if(song.lyrics !== undefined) {
+  if(song.lyrics !== undefined && song.lyrics !== "unavailable") {
     str = song.lyrics
     str= str.slice(0, str.length - 70)
   } else {
@@ -171,7 +172,8 @@ const SongShow = ({ user }) => {
           </div>
         </div>
       </div>
-      
+
+    <div>
       <h1>Lyrics Drop Herrrr.</h1>
       <div id='needtowrap'>
           <p className='content-lyrics lyrics'>{str}</p>
@@ -205,12 +207,12 @@ const SongShow = ({ user }) => {
                 value='Save Notes' 
               />
             </div>
-          <p className='show-notes-style'>{song.practiceNotes}</p>
+          <p className='show-notes-style'>{newSong.practiceNotes}</p>
           <img className='smart-cat-show' src={SmartCat}/>
         </form>
         </div>
       </div>
-
+    </div>
     </div>
   )
 }

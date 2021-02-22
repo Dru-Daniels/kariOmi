@@ -199,16 +199,7 @@ a:hover {
 
 .carousel-container {
   min-height: 538px;
-  background-attachment: fixed;
-  background-size: cover; 
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  margin: 50px 0 0 0;
-}
-.main-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 10vw;
 }
 
 .iLquPE, .sc-bdfBwQ, .lgksPe  .rec .rec-arrow .rec .rec-arrow-right{
@@ -888,7 +879,7 @@ input:checked {
 
     &:after {
       color: #f56201;
-      content: attr(data-yes);
+      content: "Yes!" attr(data-yes);
     }
     
     .toggle__handler {
@@ -1052,8 +1043,6 @@ input:checked {
 .performance-vid {
   max-width: 350px;
   margin: 15px auto;
-  // margin-left: auto;
-  // margin-right: auto;
 }
 
 #trash-icon {
@@ -1141,6 +1130,77 @@ input:checked {
 }
 
 // media queries
+
+@media screen and (max-width: 1200px) {
+  .home-page {
+    margin: 15%;
+  }
+  
+  .home-page-title {
+    font-size: 230px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .home-page {
+    margin: 10%;
+  }
+
+  .home-page-title {
+    font-size: 200px;
+  }
+  h1 {
+    font-size: 36px;
+  }
+
+  .go-to-list-container {
+    max-width: 58%;
+    margin: 10px auto;
+  }
+}
+
+
+@media screen and (max-width: 950px) {
+  .home-page {
+    margin: 8%;
+  }
+
+  .home-page-title {
+    font-size: 200px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .home-page {
+    margin: 10%;
+  }
+
+  .home-page-title {
+    font-size: 150px;
+  }
+
+  h1 {
+    font-size: 2em;
+  } 
+
+  .flex-nav-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0;
+  }
+
+  #link-to-form {
+    font-size: 14px;
+
+  }
+  .go-to-list-container {
+    max-width: 70%;
+    margin: 10px auto;
+  }
+  
+}
+
 @media screen and (max-width: 730px) {
   #needtowrap {
     -webkit-columns: 2;
@@ -1151,6 +1211,15 @@ input:checked {
     margin: 0, 0, 0, 1.3rem;
   }
 
+  #home-page-btn {
+    width: 27%;
+  }
+
+  .hm-btn {
+    font-size: .9em;
+    text-align: center;
+  }
+ 
   .icon-rating-container {
     justify-content: space-between;
   }
@@ -1168,23 +1237,20 @@ input:checked {
   }
 }
 
-@media screen and (max-width: 1000px) {
-  h1 {
-    font-size: 36px;
-  } 
-}
-
-@media screen and (max-width: 800px) {
-  h1 {
-    font-size: 2em;
-  } 
-}
-
 @media screen and (max-width: 650px) {
   .background-runner-form {
     margin: 114px auto;
     padding: 0;
     position: relative;
+  }
+
+  .home-page-title {
+    font-size: 90px;
+  }
+  
+  .hm-btn {
+    font-size: .9em;
+    text-align: center;
   }
   .go-to-title {
     padding-top: 40px;

@@ -10,6 +10,15 @@ const PerformanceTile = ({ performance, performanceDelete }) => {
     event.preventDefault()
     return performanceDelete(performance.id)
   }
+
+  const vidDiv = (
+    <div className='performance-vid'>
+      <video autoPlay playsInline muted width="100px" height="100px" controls>
+        <source src={performance.videoFile}/>
+      </video>
+    </div>
+  )
+  const vid = performance.videoFile.length > 3 ? vidDiv : null
   
   const content = (
     <div className='popover-container'>                    
@@ -17,12 +26,9 @@ const PerformanceTile = ({ performance, performanceDelete }) => {
       <p><FaStar color={'#f56201'}/> Vocals: {performance.vocalPerformance}</p>
       <p><FaThumbsUp color={'#f56201'}/> Audience Reaction: {performance.audienceReaction}</p>
       <p><FaBeer color={'#f56201'}/> # of "Beverage": {performance.numOfDrinks}</p>
+      <span>{vid}</span>
       <p><FaEdit color={'#f56201'}/> Notes: {performance.notes}</p>
-      <div className='performance-vid'>
-        <video autoPlay playsInline muted width="100px" height="100px" controls>
-          <source src={performance.videoFile}/>
-        </video>
-      </div>
+      
     </div>
   )
 

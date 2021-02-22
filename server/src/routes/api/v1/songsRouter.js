@@ -35,7 +35,7 @@ songsRouter.get('/:id', async (req, res) => {
   try {
     const song = await Song.query().findById(id)
     
-    let trackId= song.trackId  
+    let trackId= await song.trackId  
     const songLyrics = await AxiosClientTrack.searchLyrics(trackId)
     song.lyrics = songLyrics
     const serializedSong = await SongSerializer.getDetails(song)
