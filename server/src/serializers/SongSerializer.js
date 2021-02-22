@@ -11,7 +11,8 @@ class SongSerializer {
       "practiceNotes", 
       "performanceReady", 
       "artistId", 
-      "userId"
+      "userId",
+      'trackId'
     ]
 
     let serializedSong = {}
@@ -19,12 +20,25 @@ class SongSerializer {
     for (const attribute of allowedAttributes) {
       serializedSong[attribute] = song[attribute]
     }
+   
+    return serializedSong
+  }
 
-    // serializedSong.performances = await song.$relatedQuery('performances')
-    // serializedSong.performances = await Promise.all(serializedSong.performances.map(performance => {
-    //   return PerformanceSerializer.getDetails(performance)
-    // }))
+  static async getSongStats(song) {
 
+    const serializedSong = this.getDetails(song)
+    const performances = await song.$relatedQuery("performances")
+    debugger
+
+    const serializedPerformances = [] 
+    if (performances != undefined) {
+      for (const performance of performances) {
+        const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
+        serializedPerformances.push(serializedPerformance)
+      }
+    }
+    serializedSong.performances = serializedPerformances
+    
     return serializedSong
   }
 }

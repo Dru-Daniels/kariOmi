@@ -10,10 +10,10 @@ import catPic from '../../assets/scss/images/cat.png'
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
     <li key='sign-in'>
-      <Link to='/user-sessions/new'>Sign In</Link>
+      <Link id="primary-btn" to='/user-sessions/new'>Sign In</Link>
     </li>,
-    <li key='sign-up'>
-      <Link to='/users/new' className='button'>
+    <li  key='sign-up'>
+      <Link id="primary-btn" to='/users/new' className='button'>
         Sign Up
       </Link>
     </li>,
@@ -43,17 +43,20 @@ const TopBar = ({ user }) => {
             <FontAwesomeIcon icon={ faBars } />
           </a>
           <div id='hideToggle'>
-            <li id='menuItem' ><Link to='/songs/new'>Add New Song!</Link></li>
+            <li ><a id='link-to-form' href='/songs/new'>Add New Song!</a></li>
           </div>
-          <Link to='/'> 
-            <h1 className='text-center'>KariOmi
-              <img src={catPic} className='cat-pic'/>
-            </h1>
-          </Link>
+
+          <div id='showToggle'> 
+            <Link to='/'>
+              <h1 className='text-center'>KariOmi
+                <img src={catPic} className='cat-pic'/>
+              </h1>
+            </Link>
+          </div>
         </ul>
       </div>
       <div className='top-bar-right'>
-        <ul className='menu'>{user ? authenticatedListItems : unauthenticatedListItems}</ul>
+        <ul className='menu sign-in-out-ul'>{user ? authenticatedListItems : unauthenticatedListItems}</ul>
       </div>
     </div>
   )

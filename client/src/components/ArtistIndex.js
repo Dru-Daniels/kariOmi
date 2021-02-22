@@ -29,6 +29,7 @@ const ArtistIndex = props => {
 
   const artistListTiles = artists.map(artist => {
     return (
+    
       <ArtistList
         key={ artist.id }
         artist={ artist }
