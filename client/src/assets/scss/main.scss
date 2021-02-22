@@ -658,6 +658,12 @@ p {
   color: white;
 }
 
+.star-cat {
+  max-height: 35vh;
+  transform: rotate(15deg);
+  margin: 0 0 0 auto;
+}
+
 // BUTTONS
 #primary-btn, #home-page-btn {
   outline: none;
@@ -1178,6 +1184,7 @@ input:checked {
   .background-runner-form {
     margin: 114px auto;
     padding: 0;
+    position: relative;
   }
   .go-to-title {
     padding-top: 40px;

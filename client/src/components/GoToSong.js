@@ -1,5 +1,7 @@
 import React, { useState, useEffect} from 'react'
 
+import translateServerErrors from '../services/translateServerErrors'
+
 import PerformanceTile from './PerformanceTile'
 import RatingForm from './RatingForm'
 
@@ -49,7 +51,7 @@ const GoToSong = ({song}) => {
       } else {
         const body = await response.json()
         setPerformances(body.performances)
-        setOverAllSongScore(overAllSongScore)
+        setOverAllSongScore(body.overAllSongScore)
         
       }
     } catch (error) {

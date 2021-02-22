@@ -25,16 +25,20 @@ class SongSerializer {
   }
 
   static async getSongStats(song) {
+
     const serializedSong = this.getDetails(song)
-
     const performances = await song.$relatedQuery("performances")
-    
-    serializedSong.performances = await Promise.all(
-      performances.map(performance => {
-        return PerformanceSerializer.getPerformanceDetails(performance)
-      })
-      )
+    debugger
 
+    const serializedPerformances = [] 
+    if (performances != undefined) {
+      for (const performance of performances) {
+        const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
+        serializedPerformances.push(serializedPerformance)
+      }
+    }
+    serializedSong.performances = serializedPerformances
+    
     return serializedSong
   }
 }

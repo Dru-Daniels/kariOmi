@@ -16,9 +16,7 @@ const GoToList = (props) =>  {
 
   const getGoToSong = async () => {
     try {
-
-      const response = await fetch(`/api/v1/songs`)
-
+      const response = await fetch(`/api/v1/performances`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         throw new Error(errorMessage)
@@ -38,21 +36,19 @@ const GoToList = (props) =>  {
   }, [])
 
   let goToSongList = songs.map((song, i) => {
-    if (song.performanceReady === true) {
-      return (
-        <Panel header={song.songTitle} key={song.id}>  
-          < GoToSong 
-            key={song.id}
-            song={song}
-          />
-        </Panel>
-      )
-    }
+    return (
+      <Panel header={song.songTitle} key={song.id}>  
+        < GoToSong 
+          key={song.id}
+          song={song}
+        />
+      </Panel>
+    )
   })
   
   return (
     <div className='body-accent'>
-      <div className="background-runner-form background-runner-accent">
+      <div className="background-runner-form">
         <div className='go-to-list-container '>
           <h1 className='go-to-title text-center'>Go-Tos: Sing Me!</h1>
           {/* <GoToChart/> */}
