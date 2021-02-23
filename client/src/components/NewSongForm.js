@@ -101,6 +101,7 @@ const NewSongForm = (props) => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
   }, [trackTitle])
   
   const handleInputChange = event => {

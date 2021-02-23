@@ -657,7 +657,7 @@ p {
 }
 
 .go-to-list-container {
-  max-width: 50%;
+  max-width: 65%;
   margin: 20px auto;
 }
 
@@ -981,8 +981,8 @@ input:checked {
 .rating-icon {
   cursor: pointer;
   transition: color 200ms;
-  margin: 9px;
-  margin-right: 0px;
+  margin: 8px;
+  margin-left: 10px;
 }
 
 .sign-in-form, .registration-form {
@@ -1165,17 +1165,13 @@ input:checked {
   border-radius: 0 0 6px 6px;
 }
 
+.ant-collapse-header {
+  font-size: 1.5em;
+}
+
 // media queries
 
-@media screen and (max-width: 1200px) {
-  .home-page {
-    margin: 15%;
-  }
-  
-  .home-page-title {
-    font-size: 230px;
-  }
-}
+
 
 @media screen and (max-width: 1400px) {
   .home-page {
@@ -1234,7 +1230,15 @@ input:checked {
     max-width: 70%;
     margin: 10px auto;
   }
-  
+ 
+  #star-cat-container {
+    margin: 0 auto;
+  }
+
+  #star-cat {
+    max-width: 200px;
+    height: 100%;
+  }
 }
 
 @media screen and (max-width: 730px) {

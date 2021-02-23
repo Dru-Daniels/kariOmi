@@ -207,7 +207,7 @@ const SongShow = ({ user }) => {
                 value='Save Notes' 
               />
             </div>
-          <p className='show-notes-style'>{newSong.practiceNotes}</p>
+          <p className='show-notes-style'>{song.practiceNotes}</p>
           <img className='smart-cat-show' src={SmartCat}/>
         </form>
         </div>
