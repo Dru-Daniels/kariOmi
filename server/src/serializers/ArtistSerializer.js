@@ -1,6 +1,6 @@
 class ArtistSerializer {
   static getSummary(artist) {
-    const allowedAttributes = ['id', 'artistName', 'imgUrl', 'description']
+    const allowedAttributes = ['id', 'artistName', 'userId', 'imgUrl', 'description']
     const serializedArtist = {}
 
     for (const attribute of allowedAttributes) {

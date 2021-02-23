@@ -9,9 +9,10 @@ class Artist extends Model {
   static get jsonSchema () {
     return {
       type: 'object',
-      required: ['artistName'],
+      required: ['artistName', 'userId'],
       properties: {
         name: { type: 'string' },
+        userId: { type: 'string' },
         imgUrl: { type: 'string' },
         description: { type: 'string' }
       }
@@ -19,7 +20,7 @@ class Artist extends Model {
   }
 
   static get relationMappings() {
-    const Song = require('./Song.js')
+    const { User, Song } = require('./index.js')
 
     return {
       songs: {
@@ -29,9 +30,17 @@ class Artist extends Model {
           from: "artists.id",
           to: "songs.artistId"
         }
+      },
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'artists.userId',
+          to: 'users.id'
+        } 
       }
     }
-  }
+  } 
 
 }
 

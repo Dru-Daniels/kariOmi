@@ -45,7 +45,6 @@ class SongSerializer {
     serializedSong.performances = serializedPerformances
     serializedSong.overallSongScore = overAllScore
     
-    
     return serializedSong
   }
 }

@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { Artist } from '../../../models/index.js'
+import { Artist, User } from '../../../models/index.js'
 import artistSongsRouter from './artistSongsRouter.js'
 import ArtistSerializer from '../../../serializers/ArtistSerializer.js'
 
@@ -14,7 +14,7 @@ artistsRouter.get('/', async (req, res) => {
     const serializedArtists = artists.map(artist => {
       return ArtistSerializer.getSummary(artist)
     })
-    return res.status(200).json({artists: serializedArtists })
+    return res.status(200).json({artists: artists })
   } catch (error) {
     return res.status(500).json({errors: error})
   }
