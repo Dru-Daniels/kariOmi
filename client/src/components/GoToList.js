@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import starCat from '../assets/scss/images/starCat.png'
 
+// import Chart from './ratings/Chart'
 import GoToSong from './GoToSong'
-// import GoToChart from './GoToChart'
 import { Collapse } from 'antd'
 const { Panel } = Collapse
 
@@ -50,14 +50,23 @@ const GoToList = (props) =>  {
     <div className='body-accent'>
       <div className="background-runner-form">
         <div className='go-to-list-container '>
+          {/* <Chart/> */}
           <h1 className='go-to-title text-center'>Go-Tos: Sing Me!</h1>
-          {/* <GoToChart/> */}
             <Collapse onChange={callback} id='go-to-drop-down'>
               {goToSongList}
             </Collapse>
         </div>
-        <img className='song-show-item pic star-cat' src={starCat}/>
+
+        <div className='song-show-container' id='star-cat-container'>
+          <div className='song-show-item pic'>
+                <img id='star-cat' src={starCat}/>
+                <h1 className='song-show-item pic' id='star-cat-text'>
+                You're a Star!
+                </h1>
+              </div>
+        </div>
       </div>
+
     </div>
   )
 }

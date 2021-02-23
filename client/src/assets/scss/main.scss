@@ -631,11 +631,29 @@ p {
   color: #f56201;
 }
 
+.practice-title-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#practice-title {
+  font-size: 7em;
+  margin-top: 2em;
+}
+
+.practice-text {
+  transform: rotate(15deg);
+}
+
+.cat-mouse {
+  max-width: 700px;
+  margin: 0 30%;
+}
+
 .artist-title, .go-to-song-title {
   color: gray;
   font-family:'Roboto', sans-serif;
-  font-weight: 900;
-  
+  font-weight: 900;  
 }
 
 .go-to-list-container {
@@ -655,10 +673,22 @@ p {
   color: white;
 }
 
-.star-cat {
-  max-height: 35vh;
+#star-cat-container{
+  margin-top: 5%;
+  margin-left: 60%;
+}
+
+#star-cat {
+  max-height: 25vh;
   transform: rotate(15deg);
-  margin: 0 0 0 auto;
+}
+
+#star-cat-text {
+  margin-top: 0;
+  color:#ffb090;
+  transform: rotate(15deg);
+  font-size: 3em;
+  text-align: center;
 }
 
 // BUTTONS
