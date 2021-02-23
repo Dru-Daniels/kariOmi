@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import starCat from '../assets/scss/images/starCat.png'
 
-// import Chart from './ratings/Chart'
 import GoToSong from './GoToSong'
 import { Collapse } from 'antd'
 const { Panel } = Collapse
