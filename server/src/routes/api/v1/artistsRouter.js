@@ -1,4 +1,3 @@
-
 import express from 'express'
 
 import { Artist } from '../../../models/index.js'
@@ -8,8 +7,10 @@ import ArtistSerializer from '../../../serializers/ArtistSerializer.js'
 const artistsRouter = new express.Router()
 
 artistsRouter.get('/', async (req, res) => {
+  const userId = req.user.id
   try {
-    const artists = await Artist.query()
+    const user = await User.query().findById(userId)
+    const artists = await user.$relatedQuery("artists")
     const serializedArtists = artists.map(artist => {
       return ArtistSerializer.getSummary(artist)
     })

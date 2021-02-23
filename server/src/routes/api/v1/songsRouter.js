@@ -7,17 +7,18 @@ import cleanUserInput from '../../../services/cleanUserInput.js'
 
 import songPerformancesRouter from './songPerformancesRouter.js'
 
-import { Artist } from '../../../models/index.js'
-import { Song } from '../../../models/index.js'
+import { Song, User, Artist } from '../../../models/index.js'
 
 const songsRouter = new express.Router()
 
 songsRouter.use('/:songId/performances', songPerformancesRouter)
 
 songsRouter.get("/", async (req, res) => {
+  const userId = req.user.id
   try {
-    const songs = await Song.query()
-    
+    const user = await User.query().findById(userId)
+    const songs = await user.$relatedQuery("songs")
+
     const serializedSongs = []
     for (const song of songs) {
       const serializedSong = await SongSerializer.getSongStats(song)

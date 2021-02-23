@@ -1,34 +1,30 @@
-
 import express from 'express'
 import objection from 'objection'
 const { ValidationError } = objection
 
 import PerformanceSerializer from '../../../serializers/PerformanceSerializer.js'
 import SongSerializer from '../../../serializers/SongSerializer.js'
-import cleanUserInput from '../../../services/cleanUserInput.js'
 
-import { Song, Performance } from '../../../models/index.js'
+import { Song, Performance, User } from '../../../models/index.js'
 
 const performancesRouter = new express.Router()
 
 performancesRouter.get("/", async (req, res) => {
+  const userId = req.user.id
   try {
-    const songs = await Song.query()
-    
-    const serializedSongs = []
-    for (const song of songs) {
-      const serializedSong = await SongSerializer.getSongStats(song)
-      serializedSongs.push(serializedSong)
-    }
+    const user = await User.query().findById(userId)
+    const songs = await user.$relatedQuery("songs")
 
-    let newSongs = []
-    for (const song of serializedSongs) {
+ 
+    let serializedSongs = []
+    for (const song of songs) {
       if (song.performanceReady === true) {
-        newSongs.push(song)
+        const serializedSong = await SongSerializer.getSongStats(song)
+        serializedSongs.push(serializedSong)
       }
     }
 
-    return res.status(200).json({ songs: newSongs })
+    return res.status(200).json({ songs: serializedSongs })
   } catch(error){
     console.log(error)
     return res.status(500).json({ errors: error })

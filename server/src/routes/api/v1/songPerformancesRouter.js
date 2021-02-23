@@ -3,11 +3,9 @@ import { ValidationError } from 'objection'
 
 import uploadImage from '../../../services/uploadImage.js'
 import cleanUserInput from '../../../services/cleanUserInput.js'
-import SongSerializer from '../../../serializers/SongSerializer.js'
 import PerformanceSerializer from '../../../serializers/PerformanceSerializer.js'
 
 import { Song, Performance } from '../../../models/index.js'
-import { parse } from '@babel/core'
 
 const songPerformancesRouter = new express.Router({ mergeParams: true })
 
