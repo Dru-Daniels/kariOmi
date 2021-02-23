@@ -39,7 +39,7 @@ class Song extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: 'songs.artistsId',
+          from: 'songs.userId',
           to: 'users.id'
         } 
       },
