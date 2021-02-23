@@ -12,15 +12,15 @@ class PerformanceSerializer {
       'videoFile', 
       'userId', 
       'songId', 
-      'createdAt']
+      'createdAt', 
+      'performanceScore',
+    ]
 
     const serializedPerformance = {}
 
     for (const attribute of allowedAttributes) {
       serializedPerformance[attribute] = performance[attribute]
     }
-
-    serializedPerformance.overAllPerformanceScore = ((serializedPerformance.stagePresence + serializedPerformance.vocalPerformance  + serializedPerformance.audienceReaction) / 3).toFixed(2)
     
     return serializedPerformance
   }

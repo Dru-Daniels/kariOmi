@@ -18,7 +18,8 @@ class Performance extends Model {
         audienceReaction: { type: ['integer', 'string']},
         venue: { type: 'string'},
         notes: { type: 'string'},
-        videoFile: { type: 'string'}
+        videoFile: { type: 'string'},
+        performanceScore:{ type: ['integer', 'string']}
       }
     }
   }

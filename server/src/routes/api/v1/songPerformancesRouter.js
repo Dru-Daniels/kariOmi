@@ -3,11 +3,9 @@ import { ValidationError } from 'objection'
 
 import uploadImage from '../../../services/uploadImage.js'
 import cleanUserInput from '../../../services/cleanUserInput.js'
-import SongSerializer from '../../../serializers/SongSerializer.js'
 import PerformanceSerializer from '../../../serializers/PerformanceSerializer.js'
 
 import { Song, Performance } from '../../../models/index.js'
-import { parse } from '@babel/core'
 
 const songPerformancesRouter = new express.Router({ mergeParams: true })
 
@@ -22,7 +20,7 @@ songPerformancesRouter.get('/', async (req, res) => {
     for (const performance of performances) {
       const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
       serializedPerformances.push(serializedPerformance)
-      scores.push(parseFloat(serializedPerformance.overAllPerformanceScore))
+      scores.push(parseFloat(serializedPerformance.performanceScore))
     }
     let length = scores.length
     let total = scores.reduce((a,b) => a + b, 0)
@@ -47,12 +45,12 @@ songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) =
     venue, 
     notes, 
   } = formInput
- 
+
+  const performanceScore = (parseFloat(stagePresence) + parseFloat(vocalPerformance) + parseFloat(audienceReaction)) / 3 
   let videoFile
   if (req.file === undefined) {
     videoFile = " "
   } else {
-    debugger
     videoFile = req.file.location
   }
 
@@ -66,7 +64,8 @@ songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) =
       notes, 
       videoFile, 
       songId, 
-      userId 
+      userId,
+      performanceScore
     })
     const song = await Song.query().findById(songId)
     const performances = await song.$relatedQuery("performances")
@@ -76,7 +75,7 @@ songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) =
     for (const performance of performances) {
       const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
       serializedPerformances.push(serializedPerformance)
-      scores.push(parseFloat(serializedPerformance.overAllPerformanceScore))
+      scores.push(parseFloat(serializedPerformance.performanceScore))
     }
     let length = scores.length
     let total = scores.reduce((a,b) => a + b, 0)
