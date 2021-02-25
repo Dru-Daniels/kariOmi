@@ -24,28 +24,26 @@ const TopBar = ({ user }) => {
       <SignOutButton />
     </li>,
   ]
-  
+
   const hamburgerMenu = () => {
     var burger = document.getElementById('hideToggle')
-    if (burger.style.display === 'block') {
+    var burgers = document.getElementById('hideToggles')
+    var bob = document.getElementById('showToggle')
+    if (burger.style.display === 'flex') {
       burger.style.display = 'none'
+      bob.style.display = 'flex'
     } else {
-      burger.style.display = 'block'
+      burger.style.display = 'flex'
+      bob.style.display = 'none'
     }
   }
 
   return (
     <div className='top-bar' id='top-bar-color'>
       <div className='top-bar-left' >
-        <ul className='menu' id='top-bar-colors'>
-          <li className='menu-text'></li>
           <a href='javascript:void(0)' className='icon' onClick={hamburgerMenu}>
             <FontAwesomeIcon icon={ faBars } />
           </a>
-          <div id='hideToggle'>
-            <li ><Link id='link-to-form' to='/songs/new'>Add New Song!</Link></li>
-          </div>
-
           <div id='showToggle'> 
             <Link to='/'>
               <h1 className='text-center'>KariOmi
@@ -53,7 +51,11 @@ const TopBar = ({ user }) => {
               </h1>
             </Link>
           </div>
-        </ul>
+          <div id='hideToggle'>
+            <Link id='link-to-form' to='/songs/new'>Add New Song</Link>
+            <Link id='link-to-form' to='/artists'>Practice</Link>
+            <Link id='link-to-form' to='/go-tos'>Perform</Link>
+          </div>
       </div>
       <div className='top-bar-right'>
         <ul className='menu sign-in-out-ul'>{user ? authenticatedListItems : unauthenticatedListItems}</ul>

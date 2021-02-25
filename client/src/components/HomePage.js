@@ -7,7 +7,7 @@ const HomePage = (props) => {
   return (
     <div className='home-page'>
       <div className='cell'>
-      <h1 className="text-center home-page-title">KariOmi</h1>
+      <h1 className="text-center home-page-title logo">KariOmi</h1>
       <img src={catPic} className='cat-home-pg'/>
       <div className='home-pg-btn-container'>
         </div>
