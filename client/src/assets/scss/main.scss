@@ -57,10 +57,17 @@ body {
 }
 
 #link-to-form { 
-  margin: 30px 1px;
+  margin: auto 9px auto 0px;
+  font-family: 'Roboto', sans-serif;
+  padding: 8px 6px;
+  text-align: center;
   font-size: 20px;
   border: 1px solid #f56201;
-  font-family: 'Roboto', sans-serif;
+  width: 148px;
+}
+#link-to-form:hover {
+  background-color: #f56201;
+  color: white;
 }
 
 #song-form-title {
@@ -132,11 +139,22 @@ body {
   top: 0px;
   width: 100%;
   float: left;
+  height: 111px;
 }
 
 .top-bar .top-bar-left, .top-bar .top-bar-right {
   max-width: fit-content;
   font-family: 'Roboto', sans-serif; 
+}
+.top-bar-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.top-bar-right {
+  position: fixed;
+  right: 0;
+  top: 0px;
 }
 
 #top-bar-color {
@@ -155,12 +173,14 @@ body {
 #hideToggle {
   display: none;
   color: #5A54D1;
+  // position: absolute;
+  // top: 99px;
 }
 
 .icon {
-  margin-top: 17px;
   color: #5A54D1;
   font-size: 3rem;
+  margin: auto 15px;
 }
 
 a:visited, a:focus, a:active {
@@ -422,6 +442,7 @@ ipod-body{background-color: #2e2e2e;}
 }
 
 .screen{
+  position: relative;
   width: 260px;
   height: 200px;
   background: black;
@@ -435,11 +456,14 @@ ipod-body{background-color: #2e2e2e;}
 }
 
 iframe {
-  outline: none;
-  border: none;
-  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  outline: none;
+  border: none;
+  border-radius: 18px;
 }
 
 .navigator{
@@ -668,9 +692,20 @@ p {
 .show-notes-style {
   z-index: 1040;
   position: absolute;
-  margin: 35px 0 0 60px;
+  margin: 2% 0 0 4%;
   white-space: pre-line;
   color: white;
+  width: 31vw;
+  max-width: 500px;
+  min-width: 350px;
+}
+
+.smart-cat-show {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  min-width: 430px;
 }
 
 #star-cat-container{
@@ -680,6 +715,8 @@ p {
 
 #star-cat {
   max-height: 25vh;
+  height: 100%;
+  width: 100%;
   transform: rotate(15deg);
 }
 
@@ -1170,9 +1207,6 @@ input:checked {
 }
 
 // media queries
-
-
-
 @media screen and (max-width: 1400px) {
   .home-page {
     margin: 10%;
@@ -1191,6 +1225,10 @@ input:checked {
   }
 }
 
+@media screen and (max-width: 1400px) {
+
+}
+
 
 @media screen and (max-width: 950px) {
   .home-page {
@@ -1200,7 +1238,14 @@ input:checked {
   .home-page-title {
     font-size: 200px;
   }
+
+  // .show-notes-style {
+  //   margin: 19px 0 0 45px;
+  //   max-width: 380px;
+  // }
+
 }
+
 
 @media screen and (max-width: 800px) {
   .home-page {
@@ -1223,9 +1268,14 @@ input:checked {
   }
 
   #link-to-form {
-    font-size: 14px;
-
+    margin: auto 8px;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+    border: 1px solid #f56201;
+    width: fit-content;
   }
+
   .go-to-list-container {
     max-width: 70%;
     margin: 10px auto;
@@ -1238,6 +1288,7 @@ input:checked {
   #star-cat {
     max-width: 200px;
     height: 100%;
+    width: 100%;
   }
 }
 
@@ -1251,8 +1302,19 @@ input:checked {
     margin: 0, 0, 0, 1.3rem;
   }
 
+  .logo {
+    font-size: 3em;
+  }
+
   #home-page-btn {
-    width: 27%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin: 20px auto;
+    background-color: #f56201;
+    color: white;
+    width: 76vw;
   }
 
   .hm-btn {
@@ -1273,11 +1335,12 @@ input:checked {
   }
   .go-to-title {
     margin-top: 60px;
-    font-size: 2em;
+    font-size: 3em;
   }
 }
 
 @media screen and (max-width: 650px) {
+
   .background-runner-form {
     margin: 114px auto;
     padding: 0;
@@ -1285,16 +1348,16 @@ input:checked {
   }
 
   .home-page-title {
-    font-size: 90px;
+    font-size: 110px;
   }
-  
+
   .hm-btn {
     font-size: .9em;
     text-align: center;
   }
   .go-to-title {
     padding-top: 40px;
-    font-size: 28px;
+    font-size: 3em;
   }
 
   .icon-rating-container {
@@ -1309,4 +1372,44 @@ input:checked {
     max-width: 80%;
     margin: 10px auto;
   }
+}
+
+@media screen and (max-width: 510px) {
+  
+  .top-bar-left {
+    align-self: baseline;
+    margin-top: 5px;
+  }
+
+   #link-to-form {
+    padding: 0px;
+    margin-left: 8px;
+    border: none;
+  }
+
+  .icon {
+    font-size: 2rem;
+    margin: auto 4px auto 10px;
+  }
+  
+  .cat-pic {
+    height: 60px;
+  }
+
+  .go-to-title {
+    padding-top: 40px;
+    font-size: 2em;
+  }
+  
+  .home-page-title {
+    font-size: 70px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+ 
+  #link-to-form {
+    font-size: 16px;
+  }
+
 }
