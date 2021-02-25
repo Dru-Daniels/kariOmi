@@ -173,8 +173,6 @@ body {
 #hideToggle {
   display: none;
   color: #5A54D1;
-  // position: absolute;
-  // top: 99px;
 }
 
 .icon {
@@ -201,7 +199,8 @@ a:hover {
 .home-page {
   position: relative;
   width: 80vw;
-  margin: 200px;
+  margin: 200px auto;
+  max-width: 1500px;
 }
 
 .home-page-title {
@@ -1208,6 +1207,7 @@ input:checked {
 
 // media queries
 @media screen and (max-width: 1400px) {
+
   .home-page {
     margin: 10%;
   }
@@ -1222,6 +1222,11 @@ input:checked {
   .go-to-list-container {
     max-width: 58%;
     margin: 10px auto;
+  }
+
+
+  .logo {
+    font-size: 3.25em
   }
 }
 
@@ -1238,11 +1243,6 @@ input:checked {
   .home-page-title {
     font-size: 200px;
   }
-
-  // .show-notes-style {
-  //   margin: 19px 0 0 45px;
-  //   max-width: 380px;
-  // }
 
 }
 
@@ -1290,6 +1290,11 @@ input:checked {
     height: 100%;
     width: 100%;
   }
+  
+
+  .logo {
+    font-size: 3.25em
+  }
 }
 
 @media screen and (max-width: 730px) {
@@ -1300,10 +1305,6 @@ input:checked {
     padding: 1.3rem;
     column-gap: 1.3rem;
     margin: 0, 0, 0, 1.3rem;
-  }
-
-  .logo {
-    font-size: 3em;
   }
 
   #home-page-btn {
@@ -1335,6 +1336,14 @@ input:checked {
   }
   .go-to-title {
     margin-top: 60px;
+    font-size: 3em;
+  }
+
+  .home-page-title {
+    font-size: 150px;
+  }
+
+  .logo {
     font-size: 3em;
   }
 }
@@ -1376,11 +1385,6 @@ input:checked {
 
 @media screen and (max-width: 510px) {
   
-  .top-bar-left {
-    align-self: baseline;
-    margin-top: 5px;
-  }
-
    #link-to-form {
     padding: 0px;
     margin-left: 8px;
@@ -1390,6 +1394,10 @@ input:checked {
   .icon {
     font-size: 2rem;
     margin: auto 4px auto 10px;
+  }
+
+  .logo {
+    font-size: 3em;
   }
   
   .cat-pic {
@@ -1402,14 +1410,29 @@ input:checked {
   }
   
   .home-page-title {
-    font-size: 70px;
+    font-size: 90px;
+  }
+  
+  .home-page-bn {
+    width: 68vw;
   }
 }
 
+
+
 @media screen and (max-width: 380px) {
- 
+  
+  .home-page-title {
+    font-size: 70px;
+  }
+
   #link-to-form {
     font-size: 16px;
+  }
+
+
+  .logo {
+    font-size: 2.5em
   }
 
 }
