@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
-// import Carousel from "react-elastic-carousel"
 import Slider from "react-slick"
 
 import SongTile from './SongTile'
 
 const ArtistList = (props) => {
-  
   
   const [artist, setArtist] = useState({
     id: '',
