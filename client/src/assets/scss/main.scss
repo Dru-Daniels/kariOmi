@@ -9,6 +9,8 @@
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css');
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 
 @import '~antd/dist/antd.css';
 
@@ -173,8 +175,6 @@ body {
 #hideToggle {
   display: none;
   color: #5A54D1;
-  // position: absolute;
-  // top: 99px;
 }
 
 .icon {
@@ -201,7 +201,8 @@ a:hover {
 .home-page {
   position: relative;
   width: 80vw;
-  margin: 200px;
+  margin: 200px auto;
+  max-width: 1500px;
 }
 
 .home-page-title {
@@ -224,8 +225,8 @@ a:hover {
 }
 
 .carousel-container {
-  min-height: 538px;
   margin: 10vw;
+  max-width: 1500px;
 }
 
 .iLquPE, .sc-bdfBwQ, .lgksPe  .rec .rec-arrow .rec .rec-arrow-right{
@@ -252,7 +253,6 @@ a:hover {
   min-width: 275px;
   height: 400px;
   background: #f5f8ff;
-  // margin: 20px;
   border-radius: 20px;
   overflow: auto;
   box-shadow: 0 10px 10px rgba(0,0,0,0.1);
@@ -952,7 +952,6 @@ input:checked {
 
     &:after {
       color: #f56201;
-      content: "Yes!" attr(data-yes);
     }
     
     .toggle__handler {
@@ -1223,12 +1222,12 @@ input:checked {
     max-width: 58%;
     margin: 10px auto;
   }
+
+
+  .logo {
+    font-size: 3.25em
+  }
 }
-
-@media screen and (max-width: 1400px) {
-
-}
-
 
 @media screen and (max-width: 950px) {
   .home-page {
@@ -1239,13 +1238,7 @@ input:checked {
     font-size: 200px;
   }
 
-  // .show-notes-style {
-  //   margin: 19px 0 0 45px;
-  //   max-width: 380px;
-  // }
-
 }
-
 
 @media screen and (max-width: 800px) {
   .home-page {
@@ -1290,6 +1283,11 @@ input:checked {
     height: 100%;
     width: 100%;
   }
+  
+
+  .logo {
+    font-size: 3.25em
+  }
 }
 
 @media screen and (max-width: 730px) {
@@ -1300,10 +1298,6 @@ input:checked {
     padding: 1.3rem;
     column-gap: 1.3rem;
     margin: 0, 0, 0, 1.3rem;
-  }
-
-  .logo {
-    font-size: 3em;
   }
 
   #home-page-btn {
@@ -1337,14 +1331,20 @@ input:checked {
     margin-top: 60px;
     font-size: 3em;
   }
+
+  .home-page-title {
+    font-size: 150px;
+  }
+
+  .logo {
+    font-size: 3em;
+  }
 }
 
 @media screen and (max-width: 650px) {
-
   .background-runner-form {
     margin: 114px auto;
     padding: 0;
-    position: relative;
   }
 
   .home-page-title {
@@ -1376,11 +1376,6 @@ input:checked {
 
 @media screen and (max-width: 510px) {
   
-  .top-bar-left {
-    align-self: baseline;
-    margin-top: 5px;
-  }
-
    #link-to-form {
     padding: 0px;
     margin-left: 8px;
@@ -1390,6 +1385,10 @@ input:checked {
   .icon {
     font-size: 2rem;
     margin: auto 4px auto 10px;
+  }
+
+  .logo {
+    font-size: 3em;
   }
   
   .cat-pic {
@@ -1402,14 +1401,25 @@ input:checked {
   }
   
   .home-page-title {
-    font-size: 70px;
+    font-size: 90px;
+  }
+  
+  .home-page-bn {
+    width: 68vw;
   }
 }
 
-@media screen and (max-width: 380px) {
- 
+@media screen and (max-width: 380px) { 
+  .home-page-title {
+    font-size: 70px;
+  }
+
   #link-to-form {
     font-size: 16px;
+  }
+
+  .logo {
+    font-size: 2.5em
   }
 
 }

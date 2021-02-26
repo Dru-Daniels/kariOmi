@@ -1,7 +1,7 @@
 import React from 'react'
 
 const VideoDetail = ({ video }) => {
-  if (!video) {
+  if (video == null || video.length == 0) {
     return <div>
       <p>...</p>
     </div>

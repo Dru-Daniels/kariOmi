@@ -46,7 +46,7 @@ const TopBar = ({ user }) => {
           </a>
           <div id='showToggle'> 
             <Link to='/'>
-              <h1 className='text-center'>KariOmi
+              <h1 className='text-center logo'>KariOmi
                 <img src={catPic} className='cat-pic'/>
               </h1>
             </Link>

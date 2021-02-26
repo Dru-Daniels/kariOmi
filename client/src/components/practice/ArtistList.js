@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react'
+// import Carousel from "react-elastic-carousel"
+import Slider from "react-slick"
+
 import SongTile from './SongTile'
-import Carousel from "react-elastic-carousel"
 
 const ArtistList = (props) => {
   
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-    { width: 768, itemsToShow: 3 },
-    { width: 1200, itemsToShow: 4 }
-  ]
   
   const [artist, setArtist] = useState({
     id: '',
     artistName: '',
     songs: []
   })
-
+  
   const artistId = props.artist.id
-
+      
   const getArtist = async () => {
     try{
       const response = await fetch(`/api/v1/artists/${artistId}`)
@@ -33,27 +29,40 @@ const ArtistList = (props) => {
       console.error(`Error in fetch: ${error.message}`)
     }
   }
-
+  
   useEffect(() => {
     getArtist()
   }, [])
-
-  const songTiles = artist.songs.map((song) => {
+      
+  const songTiles = artist.songs.map((song, index) => {
     return (
-      <SongTile
-        key={song.id}
-        song={song}
-        artistImg={artist.imgUrl}
-      />
+      <div  key={song.id} index={index} style={{ width: 300 }}>
+        <SongTile
+          key={song.id}
+          song={song}
+          artistImg={artist.imgUrl}
+          />
+      </div>
     )
   })
+
+  var settings = {
+    className: "center",
+    centerMode: true,
+    dots: true,
+    infinite: true,
+    slidesToScroll: 1,
+    variableWidth: true,
+    adaptiveHeight: true,
+  };
+
   return(
     <div className="carousel-container">
       <h2 className="artist-title">{artist.artistName}</h2>
       <div>
-        <Carousel breakPoints={breakPoints}>
+        <Slider {...settings}>
           {songTiles}
-        </Carousel>
+        </Slider>
       </div>
     </div>
   )

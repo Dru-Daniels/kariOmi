@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 
-import translateServerErrors from '../services/translateServerErrors'
+import translateServerErrors from '../../services/translateServerErrors'
 
 import PerformanceTile from './PerformanceTile'
 import RatingForm from './RatingForm'

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 
-import CatMouse from '../assets/scss/images/catWitMouse.png'
+import CatMouse from '../../assets/scss/images/catWitMouse.png'
 
 import ArtistList from "./ArtistList"
 
@@ -24,8 +24,6 @@ const ArtistIndex = props => {
       console.error(`Error in Fetch: ${error.message}`)
     }
   }
-
-
 
   let message; 
   if (artists.length > 0) {
