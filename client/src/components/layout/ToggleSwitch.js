@@ -5,7 +5,6 @@ const ToggleSwitch = ({ id, name, checked, onChange, optionLabels, small, disabl
 
   return ( 
     <div className={ "toggleWrapper toggle-switch" + (small ? " small-switch" : "")}>
-      <p className='toggle-question'>Performance Ready?</p>
       <input
         type="checkbox"
         name={name}
@@ -28,23 +27,6 @@ const ToggleSwitch = ({ id, name, checked, onChange, optionLabels, small, disabl
             <span className="star star--4"></span>
             <span className="star star--5"></span>
             <span className="star star--6"></span>
-            
-            <span
-              className={
-                disabled
-                  ? "toggle-switch-inner toggle-switch-disabled"
-                  : "toggle-switch-inner"
-              }
-              data-yes={optionLabels[0]}
-              data-no={optionLabels[1]}
-            />
-            <span
-              className={
-              disabled
-                ? "toggle-switch-switch toggle-switch-disabled"
-                : "toggle-switch-switch"
-              }
-            />
           </label>
         ) : null}
       </div>
@@ -58,7 +40,6 @@ ToggleSwitch.defaultProps = {
 
 ToggleSwitch.propTypes = {
   id: PropTypes.string.isRequired,
-  checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string,
   optionLabels: PropTypes.array,

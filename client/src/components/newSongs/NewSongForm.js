@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
-import ErrorList from './ErrorList.js'
-import translateServerErrors from './../services/translateServerErrors.js'
-import earPhoneCat from '../assets/scss/images/pandaHeadphones.png'
+import { Context } from '../../context'
 
-import { Context } from '../context'
+import ErrorList from '../ErrorList.js'
+import translateServerErrors from '../../services/translateServerErrors.js'
+
+import earPhoneCat from '../../assets/scss/images/pandaHeadphones.png'
+
 
 import VideoList from './youtubeFolder/VideoList'
 import VideoDetail from './youtubeFolder/VideoDetail'

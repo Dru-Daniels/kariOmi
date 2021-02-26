@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import starCat from '../assets/scss/images/starCat.png'
 
-import GoToSong from './GoToSong'
 import { Collapse } from 'antd'
 const { Panel } = Collapse
+
+import GoToSong from './GoToSong'
+
+import starCat from '../../assets/scss/images/starCat.png'
 
 function callback(key) {
   console.log(key);
@@ -49,7 +51,6 @@ const GoToList = (props) =>  {
     <div className='body-accent'>
       <div className="background-runner-form">
         <div className='go-to-list-container '>
-          {/* <Chart/> */}
           <h1 className='go-to-title text-center'>Go-Tos: Sing Me!</h1>
             <Collapse onChange={callback} id='go-to-drop-down'>
               {goToSongList}
