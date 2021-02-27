@@ -21,5 +21,4 @@ KariOmi is a karaoke app where users can save and rate karaoke performances, kee
 - Express backend routers
 - Custom CSS Icon Ratings, Ipod design, and Animations throughout
 - SQL database that is set up with Objection
-- Cypress Testing
 - Nodejs backend framework
