@@ -28,7 +28,6 @@ const PerformanceTile = ({ performance, performanceDelete }) => {
       <p><FaBeer color={'#f56201'}/> # of "Beverage": {performance.numOfDrinks}</p>
       <span>{vid}</span>
       <p><FaEdit color={'#f56201'}/> Notes: {performance.notes}</p>
-      
     </div>
   )
 
