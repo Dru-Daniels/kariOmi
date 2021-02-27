@@ -27,7 +27,6 @@ const TopBar = ({ user }) => {
 
   const hamburgerMenu = () => {
     var burger = document.getElementById('hideToggle')
-    var burgers = document.getElementById('hideToggles')
     var bob = document.getElementById('showToggle')
     if (burger.style.display === 'flex') {
       burger.style.display = 'none'

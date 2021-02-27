@@ -7,6 +7,9 @@ import RabbitSing from '../../assets/scss/images/rabbitSing.png'
 import RabbitPinkDancing from '../../assets/scss/images/RabbitPinkDancing.png'
 import SmartCat from '../../assets/scss/images/smartCat.png'
 
+import Ipod from '../layout/Ipod'
+import Card from './Card'
+
 import ToggleSwitch from "../layout/ToggleSwitch"
 import ErrorList from '../ErrorList'
 
@@ -19,9 +22,7 @@ const SongShow = ({ user }) => {
 
   const getSong = async () => {
     try {
-
       const response = await fetch(`/api/v1/songs/${id}`)
-
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         throw new Error(errorMessage)
@@ -66,6 +67,27 @@ const SongShow = ({ user }) => {
     }
   }
 
+  const songDelete = async (performanceId) => {
+    try {
+      const response = await fetch(`/api/v1/performances/${id}`, {
+        method: 'DELETE',
+        headers: new Headers ({
+          "Content-Type": "application/json"
+        })
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        throw new Error(errorMessage)
+      }
+        const body = await response.json()
+        getPerformances()
+        setErrors({})
+        return true
+    } catch (error) {
+        console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
   const saveNote = (event) => {
     event.preventDefault()
     updateSong(newSong)
@@ -107,33 +129,28 @@ const SongShow = ({ user }) => {
     updateSong({...newSong, 
       performanceReady: checked})
   }
+      
+  const aboveText = (<p className='perf-ready'>Is it Performance Ready?</p>)
+  const belowText = (<p><Link to='/go-tos'>It's on your Go-To List!</Link></p>)
+
+  const toggleBtn = (
+    <ToggleSwitch 
+      id="checked" 
+      checked={ newSong.performanceReady } 
+      onChange={ onCheckedChange } 
+      aboveText={aboveText} 
+      belowText={belowText}
+    /> 
+  )
 
   return (
     <div className='grid-container' id='parent'> 
-      {/* <p>Performance Ready?</p> */}
-      <ToggleSwitch id="checked" checked={ newSong.performanceReady } onChange={ onCheckedChange }/>  
-      {/* <Link to='/go-tos'>It's on the List!</Link> */}
       <h1 className='title-song-show'>Time to Practice!</h1>
       <div className='flex' >
+
         <div className='song-show-container'>
           <div className='song-show-item'>
-            <div className='back-cover'>
-              <div className='ipod-main'>
-                <div className='screen'>
-                  <iframe allowFullScreen preload='auto' src={ videoSrcL }/> 
-                </div>
-                <div className='navigator'>        
-                  <div className='keys'>                             
-                    <span className='menu-btn'>MENU</span>                
-                    <img className='fwd' src='https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-forward-256.png'/>                  
-                    <img className='bkd' src='https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-backward-128.png'/>                  
-                    <img className='play-pause' src='https://cdn2.iconfinder.com/data/icons/snipicons/5000/play-128.png'/>                
-                    <div className='play'>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           <Ipod videoSrc={videoSrcL}/>
           </div>
           <div className='song-show-item pic'>
             <div className='song-show-item pic'>
@@ -156,24 +173,7 @@ const SongShow = ({ user }) => {
                 <img className='rabbit-show' src={ RabbitPinkDancing }/>
               </div>
           </div>
-          <div className='song-show-item'>
-            <div className='back-cover'>
-              <div className='ipod-main'>
-                <div className='screen'>
-                  <iframe allowFullScreen preload='auto' src={ videoSrcK }/> 
-                </div>
-                <div className='navigator'>        
-                  <div className='keys'>      
-                      <span className='menu-btn'>MENU</span>
-                      <img className='fwd' src='https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-forward-256.png'/>
-                      <img className='bkd' src='https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-backward-128.png'/>
-                      <img className='play-pause' src='https://cdn2.iconfinder.com/data/icons/snipicons/5000/play-128.png'/>
-                      <div className='play'></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         <Ipod videoSrc={videoSrcK}/>
         </div>
       </div>
 
@@ -184,6 +184,7 @@ const SongShow = ({ user }) => {
       </div>
 
       <h1>Check Your Progress!</h1>
+      
       <div className='grid-x grid-margin-x grid-padding-x'>
         <div className= 'cell small-12 medium-8'>      
           <form className='form-show' onSubmit={ saveNote } >
@@ -213,6 +214,15 @@ const SongShow = ({ user }) => {
             </div>
           <p className='show-notes-style'>{ song.practiceNotes }</p>
           <img className='smart-cat-show' src={ SmartCat }/>
+          <div className=''>
+            <Card
+              songDelete={songDelete}
+              text={toggleBtn} 
+              link={belowText}
+              linkText={belowText}
+              contentText={aboveText}
+            />
+          </div>
         </form>
         </div>
       </div>
