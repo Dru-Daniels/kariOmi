@@ -23,9 +23,33 @@ const ArtistList = (props) => {
         throw(error)
       }
       const body = await response.json()
-      setArtist(body.artist)
+      if (body.artist.songs.length !== 0) {
+        setArtist(body.artist)
+      } else {
+        artistDelete()
+      }
     } catch(error) {
       console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  const artistDelete = async () => {
+    try {
+      const response = await fetch(`/api/v1/artists/${artistId}`, {
+        method: 'DELETE',
+        headers: new Headers ({
+          "Content-Type": "application/json"
+        })
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        throw new Error(errorMessage)
+      }
+        const body = await response.json()
+        props.getArtists()
+        return true
+    } catch (error) {
+        console.error(`Error in fetch: ${error.message}`)
     }
   }
   

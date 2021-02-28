@@ -53,6 +53,7 @@ const ArtistIndex = props => {
       <ArtistList
         key={ artist.id }
         artist={ artist }
+        getArtists={ getArtists }
       />
     )
   })

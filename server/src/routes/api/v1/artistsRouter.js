@@ -31,6 +31,17 @@ artistsRouter.get('/:id', async (req, res) => {
   }
 })
 
+artistsRouter.delete("/:id", async (req, res) => {
+  const artistId = req.params.id
+  try {
+    await Artist.query().deleteById(artistId);
+    return res.status(200).json({delete: "artist deleted"});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ errors: error });
+  }
+});
+
 artistSongsRouter.use("/:artistId/songs", artistSongsRouter)
 
 export default artistsRouter

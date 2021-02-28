@@ -46,6 +46,7 @@ songsRouter.get('/:id', async (req, res) => {
   }
 })
 
+
 songsRouter.patch('/:id', async (req, res) => {
   try {
     const { id } = req.params
@@ -62,10 +63,23 @@ songsRouter.patch('/:id', async (req, res) => {
   }
 })
 
+songsRouter.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const song = await Song.query().findById(id);
+    await song.$relatedQuery("performances").delete()
+    await Song.query().deleteById(id);
+    return res.status(200).json({delete: "song deleted"});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ errors: error });
+  }
+});
+
+
 songsRouter.post('/', async (req, res) => {
   let { body } = req
   let formInput = cleanUserInput(body)
-  // let { karaokeVideoId, lyricVideoId, lyrics, practiceNotes, performanceReady } = formInput
   let karaokeVideoId = formInput.karaokeVideoId
   let lyricVideoId = formInput.lyricVideoId
   let lyrics = formInput.lyrics
@@ -77,15 +91,14 @@ songsRouter.post('/', async (req, res) => {
 
   let  userId  = req.user.id
   let artistId
-
   try {
     let artist = await Artist.query().findOne({artistName})
-      if(artist !== undefined) {
-        artistId = artist.id
-      } else {
-        artist = await Artist.query().insertAndFetch({artistName, userId})
-        artistId = artist.id
-      }
+    if(artist !== undefined) {
+      artistId = artist.id
+    } else {
+      artist = await Artist.query().insertAndFetch({artistName, userId})
+      artistId = artist.id
+    }
     let song = await Song.query().insertAndFetch({ 
       songTitle, 
       karaokeVideoId, 

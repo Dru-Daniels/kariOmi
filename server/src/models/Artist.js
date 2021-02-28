@@ -12,7 +12,7 @@ class Artist extends Model {
       required: ['artistName', 'userId'],
       properties: {
         name: { type: 'string' },
-        userId: { type: 'string' },
+        userId: { type: ['string', 'integer'] },
         imgUrl: { type: 'string' },
         description: { type: 'string' }
       }
