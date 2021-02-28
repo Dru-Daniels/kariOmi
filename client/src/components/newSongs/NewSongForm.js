@@ -28,7 +28,7 @@ const NewSongForm = (props) => {
   const [errors, setErrors] = useState([])
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
-  const [newSongId, setNewSongId] = useState('')
+  const [songId, setSongId] = useState('')
   const [formData, setFormData] = useState({
     track: {},
     karaokeVideoId: "",
@@ -91,8 +91,8 @@ const NewSongForm = (props) => {
         }
       } else {
         const body = await response.json()
-        const newSong = body.song
-        setNewSongId(newSong.id)
+        const song = body.song
+        setSongId(song.id)
         if(body.song) {
           setShouldRedirect(true)
         }
@@ -136,7 +136,7 @@ const NewSongForm = (props) => {
   }
 
   if(shouldRedirect){
-    return <Redirect to={`/songs/${newSongId}`} />
+    return <Redirect to={`/songs/${songId}`} />
   }
 
   const onSubmitHandler = event => {

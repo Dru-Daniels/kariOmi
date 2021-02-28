@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import { useParams } from 'react-router'
 
@@ -14,9 +14,11 @@ import ToggleSwitch from "../layout/ToggleSwitch"
 import ErrorList from '../ErrorList'
 
 const SongShow = ({ user }) => {
+  
   const [errors, setErrors] = useState({})
+  const [redirect, setRedirect] = useState(false)
+
   const [song, setSong] = useState({})
-  const [newSong, setNewSong] = useState({})
   
   const { id } = useParams()
 
@@ -29,8 +31,7 @@ const SongShow = ({ user }) => {
       }
       const body = await response.json()
       setSong(body.song)
-      setNewSong(body.song)
-      
+
     } catch (error) {
       console.error(error)
       console.error(`Error in fetch ${error.message}`)
@@ -67,9 +68,9 @@ const SongShow = ({ user }) => {
     }
   }
 
-  const songDelete = async (performanceId) => {
+  const songDelete = async () => {
     try {
-      const response = await fetch(`/api/v1/performances/${id}`, {
+      const response = await fetch(`/api/v1/songs/${id}`, {
         method: 'DELETE',
         headers: new Headers ({
           "Content-Type": "application/json"
@@ -80,7 +81,7 @@ const SongShow = ({ user }) => {
         throw new Error(errorMessage)
       }
         const body = await response.json()
-        getPerformances()
+        setRedirect(true)
         setErrors({})
         return true
     } catch (error) {
@@ -90,13 +91,13 @@ const SongShow = ({ user }) => {
 
   const saveNote = (event) => {
     event.preventDefault()
-    updateSong(newSong)
+    updateSong(song)
   }
 
   const handleInputChange = (event) => {
     event.preventDefault()
-    setNewSong({
-      ...newSong,
+    setSong({
+      ...song,
       [event.currentTarget.name]: event.currentTarget.value,
     })
   }
@@ -124,24 +125,24 @@ const SongShow = ({ user }) => {
   }
   
   const onCheckedChange = (checked) => {
-    setNewSong({...newSong, 
-      performanceReady: checked});
-    updateSong({...newSong, 
+    updateSong({...song, 
       performanceReady: checked})
   }
       
-  const aboveText = (<p className='perf-ready'>Is it Performance Ready?</p>)
-  const belowText = (<p><Link to='/go-tos'>It's on your Go-To List!</Link></p>)
+  const aboveText = (<h6><Link to='/go-tos' className='go-to-link'>Add to Go-To List!</Link></h6>)
 
   const toggleBtn = (
     <ToggleSwitch 
       id="checked" 
-      checked={ newSong.performanceReady } 
+      checked={ song.performanceReady } 
       onChange={ onCheckedChange } 
       aboveText={aboveText} 
-      belowText={belowText}
     /> 
   )
+
+  if(redirect){
+    return <Redirect to='/artists' />
+  }
 
   return (
     <div className='grid-container' id='parent'> 
@@ -199,7 +200,7 @@ const SongShow = ({ user }) => {
                 type='text' 
                 className='input'
                 name='practiceNotes' 
-                value={ newSong.practiceNotes } 
+                value={ song.practiceNotes } 
                 onChange={ handleInputChange } 
                 placeholder='Type here to update your notes =]'
               />
@@ -217,10 +218,8 @@ const SongShow = ({ user }) => {
           <div className=''>
             <Card
               songDelete={songDelete}
-              text={toggleBtn} 
-              link={belowText}
-              linkText={belowText}
-              contentText={aboveText}
+              toggleBtn={toggleBtn}
+              aboveText={aboveText}
             />
           </div>
         </form>

@@ -7,7 +7,7 @@
  */
 exports.up = async (knex) => {
   return knex.schema.table('artists', (table) => {
-    table.bigInteger('userId').notNullable().unsigned().index().references('artists.id')
+    table.bigInteger('userId').notNullable().unsigned().index().references('users.id')
   })
 }
 
@@ -16,6 +16,6 @@ exports.up = async (knex) => {
  */
 exports.down = (knex) => {
   return knex.schema.table('artists', (table) => {
-    // table.dropColumn('performanceScore')
+    table.dropColumn('userId')
   })
 }
