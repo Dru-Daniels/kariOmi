@@ -2,7 +2,7 @@ import PerformanceSerializer from './PerformanceSerializer.js'
 
 class SongSerializer {
   static async getDetails(song) {
-    const allowedAttributes = [
+    let allowedAttributes = [
       'id', 
       'songTitle', 
       'karaokeVideoId', 
@@ -17,7 +17,7 @@ class SongSerializer {
 
     let serializedSong = {}
 
-    for (const attribute of allowedAttributes) {
+    for (let attribute of allowedAttributes) {
       serializedSong[attribute] = song[attribute]
     }
    
@@ -26,14 +26,14 @@ class SongSerializer {
 
   static async getSongStats(song) {
 
-    const serializedSong = this.getDetails(song)
-    const performances = await song.$relatedQuery("performances")
+    let serializedSong = this.getDetails(song)
+    let performances = await song.$relatedQuery("performances")
 
-    const serializedPerformances = [] 
+    let serializedPerformances = [] 
     let scores = []
     if (performances.length > 0) {
-      for (const performance of performances) {
-        const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
+      for (let performance of performances) {
+        let serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
         serializedPerformances.push(serializedPerformance)
         scores.push(parseFloat(serializedPerformance.performanceScore))
       }

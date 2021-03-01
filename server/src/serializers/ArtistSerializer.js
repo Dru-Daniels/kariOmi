@@ -1,9 +1,9 @@
 class ArtistSerializer {
   static getSummary(artist) {
-    const allowedAttributes = ['id', 'artistName', 'userId', 'imgUrl', 'description']
-    const serializedArtist = {}
+    let allowedAttributes = ['id', 'artistName', 'userId', 'imgUrl', 'description']
+    let serializedArtist = {}
 
-    for (const attribute of allowedAttributes) {
+    for (let attribute of allowedAttributes) {
       serializedArtist[attribute] = artist[attribute]
     }
 
@@ -11,7 +11,7 @@ class ArtistSerializer {
   }
 
   static async getDetails(artist) {
-    const serializedArtist = this.getSummary(artist)
+    let serializedArtist = this.getSummary(artist)
     serializedArtist.songs = await artist.$relatedQuery("songs")
     return serializedArtist
   }

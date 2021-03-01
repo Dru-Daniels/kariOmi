@@ -1,7 +1,7 @@
 class PerformanceSerializer {
   static getPerformanceDetails(performance) {
     
-    const allowedAttributes = [
+    let allowedAttributes = [
       'id', 
       'stagePresence', 
       'vocalPerformance', 
@@ -16,9 +16,9 @@ class PerformanceSerializer {
       'performanceScore',
     ]
 
-    const serializedPerformance = {}
+    let serializedPerformance = {}
 
-    for (const attribute of allowedAttributes) {
+    for (let attribute of allowedAttributes) {
       serializedPerformance[attribute] = performance[attribute]
     }
     
