@@ -12,13 +12,13 @@ const songPerformancesRouter = new express.Router({ mergeParams: true })
 songPerformancesRouter.get('/', async (req, res) => {
   const id  = req.params.songId
   try {
-    const song = await Song.query().findById(id)
-    const performances = await song.$relatedQuery("performances")
+    let song = await Song.query().findById(id)
+    let performances = await song.$relatedQuery("performances")
 
-    const serializedPerformances = []
+    let serializedPerformances = []
     let scores = []
-    for (const performance of performances) {
-      const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
+    for (let performance of performances) {
+      let serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
       serializedPerformances.push(serializedPerformance)
       scores.push(parseFloat(serializedPerformance.performanceScore))
     }
@@ -35,9 +35,8 @@ songPerformancesRouter.get('/', async (req, res) => {
 songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) => {
   const { songId } = req.params
   const userId = req.user.id
-  const { body } = req
-  const formInput = cleanUserInput(body)
-  const { 
+  let formInput = req.body
+  let { 
     stagePresence, 
     vocalPerformance, 
     audienceReaction, 
@@ -46,16 +45,16 @@ songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) =
     notes, 
   } = formInput
 
-  const performanceScore = (parseFloat(stagePresence) + parseFloat(vocalPerformance) + parseFloat(audienceReaction)) / 3 
+  let performanceScore = ((parseFloat(stagePresence) + parseFloat(vocalPerformance) + parseFloat(audienceReaction)) / 3 ).toFixed(1)
   let videoFile
   if (req.file === undefined) {
     videoFile = " "
   } else {
     videoFile = req.file.location
   }
-
+  numOfDrinks = parseFloat(numOfDrinks)
   try {
-    const newPerformance = await Performance.query().insert({ 
+    await Performance.query().insert({ 
       stagePresence, 
       vocalPerformance, 
       audienceReaction, 
@@ -67,13 +66,13 @@ songPerformancesRouter.post('/', uploadImage.single('video'), async (req, res) =
       userId,
       performanceScore
     })
-    const song = await Song.query().findById(songId)
-    const performances = await song.$relatedQuery("performances")
+    let song = await Song.query().findById(songId)
+    let performances = await song.$relatedQuery("performances")
 
-    const serializedPerformances = []
+    let serializedPerformances = []
     let scores = []
-    for (const performance of performances) {
-      const serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
+    for (let performance of performances) {
+      let serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
       serializedPerformances.push(serializedPerformance)
       scores.push(parseFloat(serializedPerformance.performanceScore))
     }

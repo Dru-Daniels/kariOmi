@@ -5,18 +5,18 @@ import { FaBeer, FaStar, FaFireAlt, FaThumbsUp } from 'react-icons/fa'
 const RatingForm = ({songId, postNewPerformance}) => {
   
   const [hover, setHover] = useState({
-    One: null,
-    Two: null,
-    Three: null,
-    Four: null,
-    Five: null
+    One: 0,
+    Two: 0,
+    Three: 0,
+    Four: 0,
+    Five: 0
   })
 
   const [performance, setPerformance] = useState ({
-    stagePresence: '',
-    vocalPerformance: '',
-    audienceReaction: '',
-    numOfDrinks: '',
+    stagePresence: '0',
+    vocalPerformance: '0',
+    audienceReaction: '0',
+    numOfDrinks: '0',
     venue: '',
     notes: '',
     image: {},
@@ -46,23 +46,17 @@ const RatingForm = ({songId, postNewPerformance}) => {
       ...performance,
       image: acceptedImage[0]
     })
-    setUploadedImage({
-      preview: URL.createObjectURL(acceptedImage[0])
-    })
   }
   
   const clearForm = () => {
     setPerformance({
-      stagePresence: '',
-      vocalPerformance: '',
-      audienceReaction: '',
-      numOfDrinks: '',
+      stagePresence: '0',
+      vocalPerformance: '0',
+      audienceReaction: '0',
+      numOfDrinks: '0',
       venue: '',
       notes: '',
-      image: ''
-    })
-    setUploadedImage({
-      preview: ""
+      image:  {},
     })
   }
 
@@ -108,7 +102,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
                       color={ratingValue <= (hover.One || performance.stagePresence) ? '#f56201' : '#e4e5e9'}
                       size={16}
                       onMouseEnter={() => setHover({...hover, One: ratingValue})}
-                      onMouseLeave={() => setHover({...hover, One: null})}
+                      onMouseLeave={() => setHover({...hover, One: 0})}
                     />
                   </label>
                 )
@@ -135,7 +129,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
                     color={ratingValue <= (hover.Two || performance.vocalPerformance) ? '#f6d633' : '#e4e5e9'}
                     size={16}
                     onMouseEnter={() => setHover({...hover, Two: ratingValue})}
-                    onMouseLeave={() => setHover({...hover, Two: null})}
+                    onMouseLeave={() => setHover({...hover, Two: 0})}
                   />
               </label>
               )
@@ -162,7 +156,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
                     color={ratingValue <= (hover.Three || performance.audienceReaction) ? '#f20c90' : '#e4e5e9'}
                     size={16}
                     onMouseEnter={() => setHover({...hover, Three: ratingValue})}
-                    onMouseLeave={() => setHover({...hover, Three: null})}
+                    onMouseLeave={() => setHover({...hover, Three: 0})}
                   />
               </label>
               )
@@ -189,7 +183,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
                     color={ratingValue <= (hover.Four || performance.numOfDrinks) ? '#6f84d1' : '#e4e5e9'}
                     size={16}
                     onMouseEnter={() => setHover({...hover, Four: ratingValue})}
-                    onMouseLeave={() => setHover({...hover, Four: null})}
+                    onMouseLeave={() => setHover({...hover, Four: 0})}
                   />
               </label>
               )
