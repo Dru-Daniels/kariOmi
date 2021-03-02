@@ -1,5 +1,7 @@
 import React from 'react'
+
 import { Popover, Button, Popconfirm } from 'antd'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FaBeer, FaStar, FaFireAlt, FaThumbsUp, FaEdit } from 'react-icons/fa'
@@ -32,7 +34,7 @@ const PerformanceTile = ({ performance, performanceDelete }) => {
   )
 
   performance.createdAt = performance.createdAt.substring(0, 10)
-  const title = `Rating: ${performance.performanceScore}`
+  const title = `Rating: ${parseFloat(performance.performanceScore).toFixed(1)}`
 
   return (
     <div style={{ whiteSpace: 'wrap', color: '#ff7a45'  }}  className='popover-div'>

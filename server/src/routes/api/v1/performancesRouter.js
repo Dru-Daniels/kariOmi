@@ -1,6 +1,4 @@
 import express from 'express'
-import objection from 'objection'
-const { ValidationError } = objection
 
 import PerformanceSerializer from '../../../serializers/PerformanceSerializer.js'
 import SongSerializer from '../../../serializers/SongSerializer.js'
@@ -12,14 +10,14 @@ const performancesRouter = new express.Router()
 performancesRouter.get("/", async (req, res) => {
   const userId = req.user.id
   try {
-    const user = await User.query().findById(userId)
-    const songs = await user.$relatedQuery("songs")
+    let user = await User.query().findById(userId)
+    let songs = await user.$relatedQuery("songs")
 
- 
     let serializedSongs = []
-    for (const song of songs) {
+    for (let song of songs) {
       if (song.performanceReady === true) {
-        const serializedSong = await SongSerializer.getSongStats(song)
+        let serializedSong = await SongSerializer.getSongStats(song)
+        debugger
         serializedSongs.push(serializedSong)
       }
     }
@@ -34,12 +32,12 @@ performancesRouter.get("/", async (req, res) => {
 performancesRouter.delete('/:id', async (req, res) => {
   const performanceId = req.params.id
   try {
-    const performance = await Performance.query().findById(performanceId)
-    const userId = performance.userId
-    const song = await Song.query().findById(performance.songId)
+    let performance = await Performance.query().findById(performanceId)
+    let userId = performance.userId
+    let song = await Song.query().findById(performance.songId)
     await Performance.query().deleteById(performanceId)
-    const performances = await song.$relatedQuery('performances')
-    const serializedPerformances = await Promise.all(performances.map(performance => {
+    let performances = await song.$relatedQuery('performances')
+    let serializedPerformances = await Promise.all(performances.map(performance => {
       return PerformanceSerializer.getPerformanceDetails(performance, userId)
     }))
     return res.status(200).json({ performances: serializedPerformances })
