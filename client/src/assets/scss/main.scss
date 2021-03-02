@@ -242,26 +242,22 @@ a:hover {
 }
 
 .container {
-  position: relative;
-  max-width: 400px;
-  min-width: 300px;
   padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
 .container .card {
-  border:none;
-  width: 275px;
+  border: none;
+  width: 265px;
   height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #f5f8ff;
   border-radius: 20px;
-  overflow: auto;
-  box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   transition: 0.5s;
 }
+
 
 .container:hover .card {
   filter: blur(10px);
@@ -276,16 +272,13 @@ a:hover {
 }
 
 .container .card .circle {
-  height: 100%;
   clip-path: circle(175px at center 0);
   text-align: center;
+  height: 50%;
 }
 
-.container .card .circle h2 {
-  color: #FFF;
-  font-size: 4.5em;
+.circle h2 {
   padding: 30px 0;
-  width: 150px;
 }
 
 .container .card .content {
