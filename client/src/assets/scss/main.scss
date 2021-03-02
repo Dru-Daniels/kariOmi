@@ -319,7 +319,7 @@ a:hover {
   z-index: 1;
 }
 
-.container .card .content .song-tile-link {
+.content .song-tile-link {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -329,21 +329,13 @@ a:hover {
   margin-top: 20px;
 }
 
-.container .card:nth-child(1) .circle, 
-.container .card:nth-child(1) .content .song-tile-link {
+.circle {
   background: linear-gradient(45deg, #2f2c6b, #5A54D1 );
   background: #5A54D1;
-
 }
 
-.container .card:nth-child(2) .circle,
-.container .card:nth-child(1) .content .song-tile-link {
+.song-tile-link {
   background: #ff9d59;
-}
-
-.container .card:nth-child(2) .circle,
-.container .card:nth-child(2) .content a {
-  background: #bb02ff;
 }
 
 .cat-pic {
@@ -803,8 +795,6 @@ p {
   border-radius: 15px 15px 0 0;
   transition: .4s;
 }
-
-
 
 #home-page-btn  {
   border-bottom: none;
