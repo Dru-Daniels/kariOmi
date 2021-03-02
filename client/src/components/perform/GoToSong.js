@@ -1,33 +1,11 @@
-import React, { useState, useEffect} from 'react'
+import React from 'react'
 
 import translateServerErrors from '../../services/translateServerErrors'
 
 import PerformanceTile from './PerformanceTile'
 import RatingForm from './RatingForm'
 
-const GoToSong = ({song}) => {
-
-  const [performances, setPerformances] = useState([])
-  const [overAllSongScore, setOverAllSongScore] = useState([])
-  const [errors, setErrors] = useState({})
-  
-  const getPerformances = async () => {
-    try {
-
-      const response = await fetch(`/api/v1/songs/${song.id}/performances`)
-
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`
-        throw new Error(errorMessage)
-      }
-      const body = await response.json()
-      setPerformances(body.performances)
-      setOverAllSongScore(body.overAllSongScore)
-    } catch (error) {
-      console.error(error)
-      console.error(`Error in fetch ${error.message}`)
-    }
-  }
+const GoToSong = ({song, overAllSongScore, performances, getGoToSongs}) => {
 
   const postNewPerformance = async (formPayload) => {
     try {
@@ -49,10 +27,8 @@ const GoToSong = ({song}) => {
           throw (error)
         }
       } else {
-        const body = await response.json()
-        setPerformances(body.performances)
-        setOverAllSongScore(body.overAllSongScore)
-        
+        await response.json()
+        getGoToSongs()        
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -71,9 +47,8 @@ const GoToSong = ({song}) => {
           const errorMessage = `${response.status} (${response.statusText})`
           throw new Error(errorMessage)
         }
-          const body = await response.json()
-          getPerformances()
-          setErrors({})
+          await response.json()
+          getGoToSongs()
           return true
       } catch (error) {
           console.error(`Error in fetch: ${error.message}`)
@@ -90,10 +65,6 @@ const GoToSong = ({song}) => {
     )
   })
 
-  useEffect(() => {
-    getPerformances()
-  }, [])
-
   let songScore = overAllSongScore
   songScore = (isNaN(songScore) ? 'NA' : songScore)
 
@@ -103,10 +74,8 @@ const GoToSong = ({song}) => {
         <div id='song-score'>
           <span><p className='song-score-num'>{songScore}</p></span>
         </div>
-
       <h4 className='rating-card-titles'> Memories:</h4>
           {performanceList}
-
         <div className='text-right'>
           <input
             className='primary-btn' 

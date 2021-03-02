@@ -2,7 +2,6 @@ import express from 'express'
 import { ValidationError } from 'objection'
 
 import uploadImage from '../../../services/uploadImage.js'
-import cleanUserInput from '../../../services/cleanUserInput.js'
 import PerformanceSerializer from '../../../serializers/PerformanceSerializer.js'
 
 import { Song, Performance } from '../../../models/index.js'

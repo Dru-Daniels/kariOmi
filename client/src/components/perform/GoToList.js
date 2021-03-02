@@ -4,18 +4,13 @@ import { Collapse } from 'antd'
 const { Panel } = Collapse
 
 import GoToSong from './GoToSong'
-
 import starCat from '../../assets/scss/images/starCat.png'
 
-function callback(key) {
-  console.log(key);
-}
-
 const GoToList = (props) =>  {
-
+  
   const [songs, setSongs] = useState([])
-
-  const getGoToSong = async () => {
+  
+  const getGoToSongs = async () => {
     try {
       const response = await fetch(`/api/v1/performances`)
       if (!response.ok) {
@@ -24,24 +19,29 @@ const GoToList = (props) =>  {
       }
       const body = await response.json()
       setSongs(body.songs)
-     
     } catch (error) {
       console.error(error)
       console.error(`Error in fetch ${error.message}`)
     }
   }
+  
+  function callback(key) {
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    getGoToSong()
+    getGoToSongs()
   }, [])
 
   let goToSongList = songs.map((song, i) => {
     return (
       <Panel header={song.songTitle} key={song.id}>  
         < GoToSong 
+          overAllSongScore={song.overallSongScore}
+          performances={song.performances}
           key={song.id}
           song={song}
+          getGoToSongs={getGoToSongs}
         />
       </Panel>
     )

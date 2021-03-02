@@ -26,14 +26,32 @@ class SongSerializer {
 
   static async getSongStats(song) {
 
-    let serializedSong = this.getDetails(song)
+    let allowedAttributes = [
+      'id', 
+      'songTitle', 
+      'karaokeVideoId', 
+      'lyricVideoId', 
+      'lyrics', 
+      "practiceNotes", 
+      "performanceReady", 
+      "artistId", 
+      "userId",
+      'trackId'
+    ]
+
+    let serializedSong = {}
+
+    for (let attribute of allowedAttributes) {
+      serializedSong[attribute] = song[attribute]
+    }
     let performances = await song.$relatedQuery("performances")
 
     let serializedPerformances = [] 
+    let serializedPerformance
     let scores = []
     if (performances.length > 0) {
       for (let performance of performances) {
-        let serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
+        serializedPerformance = await PerformanceSerializer.getPerformanceDetails(performance)
         serializedPerformances.push(serializedPerformance)
         scores.push(parseFloat(serializedPerformance.performanceScore))
       }
@@ -42,8 +60,8 @@ class SongSerializer {
     let total = scores.reduce((a,b) => a + b, 0)
     let overAllScore = (total / length).toFixed(1)
 
-    serializedSong.performances = serializedPerformances
-    serializedSong.overallSongScore = overAllScore
+    serializedSong.performances = await serializedPerformances
+    serializedSong.overallSongScore = await overAllScore
     
     return serializedSong
   }
