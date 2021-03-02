@@ -45,7 +45,7 @@ const ArtistList = (props) => {
         const errorMessage = `${response.status} (${response.statusText})`
         throw new Error(errorMessage)
       }
-        const body = await response.json()
+        await response.json()
         props.getArtists()
         return true
     } catch (error) {
