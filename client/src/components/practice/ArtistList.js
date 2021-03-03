@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Slider from "react-slick"
 
 import SongTile from './SongTile'
 
 const ArtistList = (props) => {
-  
   
   const [artist, setArtist] = useState({
     id: '',
@@ -59,7 +57,7 @@ const ArtistList = (props) => {
       
   const songTiles = artist.songs.map((song, index) => {
     return (
-      <div  key={song.id} index={index} style={{ width: 300 }}>
+      <div  className='item' key={song.id} >
         <SongTile
           key={song.id}
           song={song}
@@ -69,23 +67,11 @@ const ArtistList = (props) => {
     )
   })
 
-  var settings = {
-    className: "center",
-    centerMode: true,
-    dots: true,
-    infinite: true,
-    slidesToScroll: 1,
-    variableWidth: true,
-    adaptiveHeight: true,
-  };
-
   return(
     <div className="carousel-container">
       <h2 className="artist-title">{artist.artistName}</h2>
-      <div>
-        <Slider {...settings}>
+      <div className='containers'>
           {songTiles}
-        </Slider>
       </div>
     </div>
   )

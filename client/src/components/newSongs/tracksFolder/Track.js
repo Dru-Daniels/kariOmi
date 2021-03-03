@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaPlay, FaCompactDisc } from 'react-icons/fa'
 
 const Track = (props) => {
   const {track, handleTrackSelect} = props
@@ -8,26 +9,22 @@ const Track = (props) => {
   }
 
   return (
-    <div className="col-md-6" >
+    <label
+      className="track-label"
+      name="track"
+      value={track}
+      onClick={handleSongChoice}
+    >
       <div id='track-tile'>
         <h5 id='card-title'>{track.artist_name}</h5>
         <p className="card-text">
-          <strong><i ></i>Track</strong>: {track.track_name}
+          <strong><FaPlay size={16} />Track</strong>: {track.track_name}
           <br/>
-          <strong><i className=" fas fa-compact-disc"></i>Album</strong>:
+          <strong>< FaCompactDisc size={16} />Album</strong>:
           {track.album_name}
         </p>
-          <label
-            id="primary-btn"
-            type="submit"
-            className="btn btn-dark btn-dark"
-            name="track"
-            value={track}
-            onClick={handleSongChoice}
-          >Choose me!
-          </label> 
       </div>
-    </div>
+    </label> 
   )
 }
 

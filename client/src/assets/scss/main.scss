@@ -1,16 +1,10 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css');
-@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 
 @import '~antd/dist/antd.css';
 
@@ -87,22 +81,50 @@ body {
   max-width: 800px;
 }
 
+#song-form-title-main {
+  padding-top: 1em;
+  padding-bottom: .5em;
+}
+
 .performance-div {
   display: flex;
   flex-direction: row;
 }
 
+.track-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 #track-tile {
-  padding: 13px 5px 0 5px;
+  padding: 20px;
+  width: 370px;
   margin: 10px;
   background-color: #fff;
-  border-radius: 4px;
+  border-radius: 10px;
   min-height: 180px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   box-shadow: 5px 3px 5px darkgrey;
 }
+
+.track-label:focus {
+  outline: 1px solid #2f2c6b;
+}
+
+#card-title {
+  font-family: 'Roboto';
+  font-weight: 900;
+  text-align: center;
+  color: #f56201;
+  font-size: 1.15rem;
+  padding: 5px;
+}
+
+
 .card-text {
   padding: 0 8px;
   color: #555;
@@ -119,15 +141,29 @@ body {
 }
 
 #small-vids {
-  margin: 10px 10px 10px 10px !important;
+  margin: 10px !important;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
+img.ui.image {
+  border-radius: 10px;
+}
+
 #large-vid {
   margin-top: 10px;
+  background-color: transparent;
 }
+
+.vid-description {
+  height: 100px;
+  text-align: center;
+  font-family: 'Roboto';
+  color: gray;
+  font-weight: 900;
+}
+
 .input {
   border-radius: 10px;
   height: 50px;
@@ -230,23 +266,29 @@ a:hover {
 }
 
 .carousel-container {
-  margin: 8% auto;
+  margin: 4% auto;
   width: 85%;
   max-width: 1500px;
 }
 
-.iLquPE, .sc-bdfBwQ, .lgksPe  .rec .rec-arrow .rec .rec-arrow-right{
-  box-shadow: transparent;
-  background-color: transparent;
-  font-size: 2em;
+.containers {
+  display: flex;
+  padding: 20px 30px;
+  overflow-x: auto;
+  min-height: 430px;
+  align-items: center;
+  margin-right: 6%;
 }
 
-.container {
+.containers::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
   padding: 20px;
 }
 
-.container .card {
-  border: none;
+.card {
   width: 265px;
   height: 400px;
   display: flex;
@@ -258,57 +300,46 @@ a:hover {
   transition: 0.5s;
 }
 
-
-.container:hover .card {
+.item:hover .card {
   filter: blur(10px);
   transform: scale(0.98);
   opacity: 0.5;
 }
 
-.container .card:hover {
+.item .card:hover {
   filter: blur(0px);
   transform: scale(1.1);
   opacity: 1;
 }
 
-.container .card .circle {
+.containers .card .circle {
   clip-path: circle(175px at center 0);
   text-align: center;
   height: 50%;
+  display: flex;
+  align-items: center
 }
 
-.circle h2 {
-  padding: 30px 0;
-}
-
-.container .card .content {
-  padding: 20px 20px 30px 20px;
+.containers .card .content {
+  padding: 0px 20px 25px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.container .card .content .card-title {
+.containers .card .content .card-title {
   color: #666;
-  font-size: 1.25em;
+  font-size: 1.15em;
   font-family: 'Roboto';
   font-weight: 900;
 }
 
-#card-title {
-  font-family: 'Roboto';
-  font-weight: 900;
-  text-align: center;
-  color: #f56201;
-
-}
-
-.container .card .content p {
+.containers .card .content p {
   color: #666;
 }
 
-.container .card .content img {
+.containers .card .content img {
   z-index: 1;
 }
 
@@ -325,6 +356,10 @@ a:hover {
 .circle {
   background: linear-gradient(45deg, #2f2c6b, #5A54D1 );
   background: #5A54D1;
+}
+
+.mic-pic {
+  height: 65%;
 }
 
 .song-tile-link {
@@ -347,23 +382,21 @@ h1 {
 // start of show page
 
 .title-song-show {
-  margin-bottom: 75px;
+  margin: 2em auto;
   text-align: center;
   font-size: 5rem;
+  padding-top: .5em;
 }
 
 .option-card {
   position: fixed;
+  background-color: #e2e7fb;
   top: 110px;
   right: 0px;
-  border: none;
-  border-radius: 4px;
-  overflow: auto;
   transition: 0.5s;
   color: white;
-  padding: 5px 5px 5px 10px;
   display: flex;
-  width: 71%;
+  width: 100%;
   justify-content: flex-end;
 }
 
@@ -399,7 +432,7 @@ h1 {
 }
 
 .toggle-btn {
-  margin: 1em 3em;
+  margin: 1em;
 }
 
 .toggle-switch-checkbox {
@@ -432,7 +465,11 @@ h1 {
 }
 
 .rabbit-show {
+  display: block;
   max-height: 300px;
+  width: auto;
+  height: auto;
+  max-width: 260px;
 }
 
 .song-show-item .top {
@@ -749,7 +786,6 @@ p {
   vertical-align: middle;
   max-width: 100%;
   height: auto;
-  min-width: 430px;
 }
 
 #star-cat-container{
@@ -1436,6 +1472,10 @@ input:checked {
   h4 {
     font-size: 1em;
   }
+
+  #song-form-title {
+    font-size: 1.5em;
+  }
   
   .go-to-list-container {
     max-width: 93%;
@@ -1445,6 +1485,22 @@ input:checked {
   #star-cat-text {
     font-size: 2em;
   }
+
+  .rendered-vids {
+    flex-direction: column;
+  }
+
+  #small-vids {
+    margin: 30px 30px 30px 30px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  img.ui.image {
+    display: block;
+  }
+
 }
 
 @media screen and (max-width: 510px) {
@@ -1462,6 +1518,10 @@ input:checked {
 
   .logo {
     font-size: 3em;
+  }
+  .title-song-show {
+    font-size: 3.25em;
+    padding-top: 1.5em;
   }
   
   .cat-pic {
