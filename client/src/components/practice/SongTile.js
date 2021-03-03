@@ -4,14 +4,13 @@ import micPic from '../../assets/scss/images/mic.png'
 
 const SongTile = (props) => {
 
-  const lyrics = props.song.lyrics.substring(0,48)
-  const songTitle = props.song.songTitle.substring(0,41)
+  const lyrics = props.song.lyrics.substring(0,20)
+  const songTitle = props.song.songTitle.substring(0,38)
 
   return(
-    <div className="container">
       <div className="card">
         <div className="circle">
-          <h2><img src={ micPic } className='cat-pic'/></h2>
+          <img src={ micPic } className='mic-pic'/>
         </div>
         <div className='content'>
           <p className='card-title'>{ songTitle }</p>
@@ -21,7 +20,6 @@ const SongTile = (props) => {
           </Link>
         </div>
       </div>
-    </div>
   )
 }
 

@@ -10,7 +10,7 @@ const Tracks = ({handleTrackSelect}) => {
   return (
     <>
       <h4 id='song-form-title'>{heading}</h4>
-      <div className='row'>
+      <div className='track-container'>
         {track_list.map(item => (
           <Track key={item.track.track_id} track={item.track} handleTrackSelect={handleTrackSelect}/>
         ))}

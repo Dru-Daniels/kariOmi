@@ -1,10 +1,12 @@
 import React from 'react'
 
 const VideoDetail = ({ video }) => {
-  if (video == null || video.length == 0) {
-    return <div>
-      <p>...</p>
-    </div>
+  if (!video) {
+    return (
+      <div>
+        <p>Click on a video to add it to your song card</p>
+      </div>
+    )
   }
 
   const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`
@@ -14,9 +16,9 @@ const VideoDetail = ({ video }) => {
       <div className='ui embed' id='large-vid'>
         <iframe src={videoSrc} allowFullScreen title='Video player' />
       </div>
-      <div className='ui segment'>
-        <h4>^This Video will Save to Your Song Card!</h4>
-        <h4 className='ui header'>{video.snippet.title}</h4>
+      <div className='vid-description'>
+        <h4 id='song-form-title'>^This Video will Save to Your Song Card!</h4>
+        <p >Not every video will play, make sure to check your selection before submitting!</p>
       </div>
     </div>
   )
