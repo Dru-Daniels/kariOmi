@@ -290,7 +290,7 @@ a:hover {
 
 .card {
   width: 265px;
-  height: 400px;
+  height: 370px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1572,5 +1572,18 @@ input:checked {
   .rating-icon {
     margin: 7px;
     margin-left: 10px;
+  }
+  .carousel-container {
+    margin: 4% auto;
+    max-width: 1500px;
+  }
+
+  .containers {
+    padding: 5px;
+    margin-right: 0;
+  }
+
+  .item {
+    padding: 2px;
   }
 }
