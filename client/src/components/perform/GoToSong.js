@@ -1,13 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import translateServerErrors from '../../services/translateServerErrors'
 
 import PerformanceTile from './PerformanceTile'
+import Spinner from '../layout/Spinner'
 import RatingForm from './RatingForm'
 
 const GoToSong = ({song, overAllSongScore, performances, getGoToSongs}) => {
+  
+  const [spin, setSpin] = useState(false)
 
   const postNewPerformance = async (formPayload) => {
+    setSpin(true)
     try {
       const response = await fetch(`/api/v1/songs/${song.id}/performances`, {
         method: "POST",
@@ -28,7 +32,8 @@ const GoToSong = ({song, overAllSongScore, performances, getGoToSongs}) => {
         }
       } else {
         await response.json()
-        getGoToSongs()        
+        getGoToSongs()   
+        setSpin(false)     
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -68,6 +73,8 @@ const GoToSong = ({song, overAllSongScore, performances, getGoToSongs}) => {
   let songScore = overAllSongScore
   songScore = (isNaN(songScore) ? 'NA' : songScore)
 
+  let alertMessage
+
   return (
     <div>
       <h4 className='rating-card-titles' >Song Score: </h4>
@@ -76,19 +83,20 @@ const GoToSong = ({song, overAllSongScore, performances, getGoToSongs}) => {
         </div>
       <h4 className='rating-card-titles'> Memories:</h4>
           {performanceList}
-        <div className='text-right'>
-          <input
-            className='primary-btn' 
-            id='primary-btn' 
-            type='submit'
-            value='Add New Performance' 
-          />
-        </div>
-        <RatingForm
-          key={song.id}
-          songId={song.id}
-          postNewPerformance={postNewPerformance}
+        <Spinner spin={spin} alertMessage={alertMessage}/>
+      <div className='text-right'>
+        <input
+          className='primary-btn' 
+          id='primary-btn' 
+          type='submit'
+          value='Add New Performance' 
         />
+      </div>
+      <RatingForm
+        key={song.id}
+        songId={song.id}
+        postNewPerformance={postNewPerformance}
+      />
       <hr/>
     </div>
   )
