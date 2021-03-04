@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
-import Dropzone from 'react-dropzone'
-import { FaBeer, FaStar, FaFireAlt, FaThumbsUp } from 'react-icons/fa'
 
-const RatingForm = ({songId, postNewPerformance}) => {
+import { FaBeer, FaStar, FaFireAlt, FaThumbsUp, FaVideo} from 'react-icons/fa'
+
+import DropZoneFile from './DropZoneFile'
+
+const RatingForm = ({songId, postNewPerformance, spin}) => {
   
   const [hover, setHover] = useState({
     One: 0,
@@ -23,8 +25,6 @@ const RatingForm = ({songId, postNewPerformance}) => {
     songId: songId
   })
 
-  const [ uploadedImage, setUploadedImage] = useState([{}])
-
   const handleSubmit = (event) => {
     event.preventDefault()
     const body = new FormData()
@@ -37,8 +37,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
     body.append('video', performance.image)
     body.append('songId', performance.songId)
     postNewPerformance(body)
-    clearForm()
-    
+    clearForm()  
   }
 
   const handleFileUpload = (acceptedImage) => {
@@ -47,7 +46,19 @@ const RatingForm = ({songId, postNewPerformance}) => {
       image: acceptedImage[0]
     })
   }
-  
+
+  let dropzoneTitle=`Drag 'n' drop a video file of your performance!`
+  if(performance.image.name) {
+    dropzoneTitle = (
+      <>
+        <FaVideo
+          className='rating-icon'
+          color={'#8e9bce'}
+          size={20}/> {performance.image.name} received!
+      </>
+    )
+  }
+
   const clearForm = () => {
     setPerformance({
       stagePresence: '0',
@@ -65,19 +76,6 @@ const RatingForm = ({songId, postNewPerformance}) => {
       ...performance,
       [event.currentTarget.name]: event.currentTarget.value
     })
-  }
-
-  const dropzoneStyle = {
-    width: "85%",
-    height: "70px",
-    padding: "0x",
-    boxShadow: "1px 2px 3px #e2e7fb"
-  }
-
-  const dropzoneText = {
-    height: 70 + 'px', 
-    textAlign: 'center', 
-    justifyItems:'center'
   }
 
   return (
@@ -220,21 +218,7 @@ const RatingForm = ({songId, postNewPerformance}) => {
             value='Submit' 
           />
         </div>
-        <Dropzone 
-          onDrop={handleFileUpload} 
-          className='drop-zone'
-          multiple={false}
-        >
-          {({getRootProps, getInputProps}) => (
-            <section  style={dropzoneStyle} >
-              <div {...getRootProps()}>
-              <input {...getInputProps()}/>
-              <p  style={dropzoneText}> Drag 'n' drop a video file of your performance!</p>
-              </div>
-            </section>
-          )}
-        </Dropzone>
-          
+        <DropZoneFile handleFileUpload={handleFileUpload} dropzoneTitle={dropzoneTitle}/>
         </div>
       </form>
     </div>
