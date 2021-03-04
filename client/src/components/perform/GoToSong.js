@@ -73,7 +73,7 @@ const GoToSong = ({song, overAllSongScore, performances, getGoToSongs}) => {
   let songScore = overAllSongScore
   songScore = (isNaN(songScore) ? 'NA' : songScore)
 
-  let alertMessage
+  let alertMessage='Uploading Performance! Videos make take time.'
 
   return (
     <div>

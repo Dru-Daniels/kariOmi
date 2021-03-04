@@ -16,7 +16,7 @@ const PerformanceTile = ({ performance, performanceDelete }) => {
   const vidDiv = (
     <div className='performance-vid'>
       <video autoPlay playsInline muted width="100px" height="100px" controls preload="metadata" >
-        <source allowFullScreen preload='auto' src={performance.videoFile}/> 
+        <source allowFullScreen preload='auto' type="video/mp4" src={performance.videoFile}/> 
       </video>
     </div>
   )
