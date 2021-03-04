@@ -17,11 +17,10 @@ performancesRouter.get("/", async (req, res) => {
     for (let song of songs) {
       if (song.performanceReady === true) {
         let serializedSong = await SongSerializer.getSongStats(song)
-        debugger
         serializedSongs.push(serializedSong)
       }
     }
-
+    serializedSongs= serializedSongs.sort((a,b)=> (a.overallSongScore < b.overallSongScore ? 1 : -1))
     return res.status(200).json({ songs: serializedSongs })
   } catch(error){
     console.log(error)

@@ -10,11 +10,15 @@ artistsRouter.get('/', async (req, res) => {
   const userId = req.user.id
   try {
     const user = await User.query().findById(userId)
-    const artists = await user.$relatedQuery("artists")
-    const serializedArtists = artists.map(artist => {
-      return ArtistSerializer.getSummary(artist)
-    })
-    return res.status(200).json({artists: artists })
+    let artists = await user.$relatedQuery("artists").orderBy('artistName').where('userId', userId)
+    let filteredArtists = artists.filter((s => a => !s.has(a.id) && s.add(a.id))(new Set))
+    let serializedArtists = []
+    for (let artist of filteredArtists) {
+      let serializedArtist = await ArtistSerializer.getDetails(artist, userId)
+      serializedArtists.push(serializedArtist)
+    }
+
+    return res.status(200).json({artists: serializedArtists })
   } catch (error) {
     return res.status(500).json({errors: error})
   }

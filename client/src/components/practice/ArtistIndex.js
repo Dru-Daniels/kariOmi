@@ -17,7 +17,6 @@ const ArtistIndex = props => {
         const errorMessage = `${response.status} (${response.statusText})`
         throw new Error(errorMessage)
       }
-
       const body = await response.json()
       setArtists(body.artists)
     } catch (error) {
@@ -49,7 +48,6 @@ const ArtistIndex = props => {
 
   const artistListTiles = artists.map(artist => {
     return (
-    
       <ArtistList
         key={ artist.id }
         artist={ artist }

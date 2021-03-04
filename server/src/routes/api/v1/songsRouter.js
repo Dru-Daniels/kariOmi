@@ -96,7 +96,7 @@ songsRouter.post('/', async (req, res) => {
     if(artist !== undefined) {
       artistId = artist.id
     } else {
-      artist = await Artist.query().insertAndFetch({artistName, userId})
+      artist = await Artist.query().insertAndFetch({artistName})
       artistId = artist.id
     }
     let song = await Song.query().insertAndFetch({ 
