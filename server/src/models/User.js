@@ -1,18 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const Bcrypt = require("bcrypt")
-const unique = require("objection-unique")
-const Model = require("./Model")
+const Bcrypt = require('bcrypt')
+const unique = require('objection-unique')
+const Model = require('./Model')
 
 const saltRounds = 10
 
 const uniqueFunc = unique({
-  fields: ["email"],
-  identifiers: ["id"],
+  fields: ['email'],
+  identifiers: ['id'],
 })
 
 class User extends uniqueFunc(Model) {
   static get tableName() {
-    return "users"
+    return 'users'
   }
 
   set password(newPassword) {
@@ -25,12 +25,12 @@ class User extends uniqueFunc(Model) {
 
   static get jsonSchema() {
     return {
-      type: "object",
-      required: ["email"],
+      type: 'object',
+      required: ['email'],
 
       properties: {
-        email: { type: "string" },
-        cryptedPassword: { type: "string" },
+        email: { type: 'string' },
+        cryptedPassword: { type: 'string' },
       },
     }
   }
@@ -53,8 +53,8 @@ class User extends uniqueFunc(Model) {
         relation: Model.HasManyRelation,
         modelClass: Song,
         join: {
-          from: "users.id",
-          to: "songs.userId"
+          from: 'users.id',
+          to: 'songs.userId'
         }
       },
       performances: {
@@ -66,11 +66,15 @@ class User extends uniqueFunc(Model) {
         }
       },
       artists: {
-        relation: Model.HasManyRelation,
+        relation: Model.ManyToManyRelation,
         modelClass: Artist,
         join: {
-          from: "users.id",
-          to: "artists.userId"
+          from: 'users.id',
+          through: {
+            from: 'songs.userId',
+            to: 'songs.artistId'
+          },
+          to: 'artists.id'
         }
       },
     }

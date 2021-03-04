@@ -9,10 +9,9 @@ class Artist extends Model {
   static get jsonSchema () {
     return {
       type: 'object',
-      required: ['artistName', 'userId'],
+      required: ['artistName'],
       properties: {
         name: { type: 'string' },
-        userId: { type: ['string', 'integer'] },
         imgUrl: { type: 'string' },
         description: { type: 'string' }
       }
@@ -31,11 +30,15 @@ class Artist extends Model {
           to: "songs.artistId"
         }
       },
-      user: {
-        relation: Model.BelongsToOneRelation,
+      users: {
+        relation: Model.ManyToManyRelation,
         modelClass: User,
         join: {
-          from: 'artists.userId',
+          from: 'artists.id',
+          through: {
+            from: 'songs.artistId',
+            to: 'songs.userId'
+          },
           to: 'users.id'
         } 
       }
