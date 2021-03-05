@@ -2,7 +2,12 @@ import React from 'react'
 import { FaPlay, FaCompactDisc } from 'react-icons/fa'
 
 const Track = (props) => {
-  const {track, handleTrackSelect} = props
+  const {track, handleTrackSelect, selectedStatus} = props
+
+  let divClass = "track-tile tile-selected"
+  if(!selectedStatus) {
+    divClass = 'track-tile'
+  }
 
   const handleSongChoice = (e) => {
     handleTrackSelect(track)
@@ -15,7 +20,7 @@ const Track = (props) => {
       value={track}
       onClick={handleSongChoice}
     >
-      <div id='track-tile'>
+      <div className={divClass}>
         <h5 id='card-title'>{track.artist_name}</h5>
         <p className="card-text">
           <strong><FaPlay size={16} />Track</strong>: {track.track_name}

@@ -98,7 +98,7 @@ body {
   justify-content: space-between;
 }
 
-#track-tile {
+.track-tile {
   padding: 20px;
   width: 370px;
   margin: 10px;
@@ -111,8 +111,9 @@ body {
   box-shadow: 5px 3px 5px darkgrey;
 }
 
-.track-label:focus {
-  outline: 1px solid #2f2c6b;
+.tile-selected {
+  border: 1px solid #ffa07a;
+  box-shadow: 3px 3px 10px #ffa07a;
 }
 
 #card-title {
@@ -153,6 +154,7 @@ img.ui.image {
 
 #large-vid {
   margin-top: 10px;
+  border-radius: 20px;
   background-color: transparent;
 }
 
@@ -215,7 +217,6 @@ img.ui.image {
 
 .perf-ready {
   font-family: 'Roboto', sans-serif;
-  // font-size: 1.5em;
 }
 
 .icon {
@@ -490,6 +491,7 @@ h1 {
   transform: scale(1.2) !important;
 }
 
+// IPOD
 ipod-body{background-color: #2e2e2e;}
 .back-cover{
   width: 300px;

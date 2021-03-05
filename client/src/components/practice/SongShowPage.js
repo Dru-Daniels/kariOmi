@@ -13,12 +13,13 @@ import Card from './Card'
 import ToggleSwitch from "../layout/ToggleSwitch"
 import ErrorList from '../ErrorList'
 
-const SongShow = ({ user }) => {
+const SongShow = (props) => {
   
   const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState(false)
 
   const [song, setSong] = useState({})
+  const [practiceNote, setPracticeNote] =useState("")
   
   const { id } = useParams()
 
@@ -31,6 +32,7 @@ const SongShow = ({ user }) => {
       }
       const body = await response.json()
       setSong(body.song)
+      setPracticeNote(body.song.practiceNotes)
 
     } catch (error) {
       console.error(error)
@@ -60,6 +62,7 @@ const SongShow = ({ user }) => {
       } else {
         const body = await response.json()
         setSong(body.song)
+        setPracticeNote(body.song.practiceNotes)
         setErrors({})
         return
       }
@@ -80,7 +83,7 @@ const SongShow = ({ user }) => {
         const errorMessage = `${response.status} (${response.statusText})`
         throw new Error(errorMessage)
       }
-        const body = await response.json()
+        await response.json()
         setRedirect(true)
         setErrors({})
         return true
@@ -130,7 +133,6 @@ const SongShow = ({ user }) => {
   }
       
   const aboveText = (<h6><Link to='/go-tos' className='go-to-link'>Add to Go-To List!</Link></h6>)
-
   const toggleBtn = (
     <ToggleSwitch 
       id="checked" 
@@ -213,7 +215,7 @@ const SongShow = ({ user }) => {
                 value='Save Notes' 
               />
             </div>
-          <p className='show-notes-style'>{ song.practiceNotes }</p>
+          <p className='show-notes-style'>{ practiceNote }</p>
           <img className='smart-cat-show' src={ SmartCat }/>
           <div className=''>
             <Card
