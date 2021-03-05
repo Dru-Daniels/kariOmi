@@ -16,9 +16,29 @@ KariOmi is a karaoke app where users can save and rate karaoke performances, kee
 - Delete a performance or remove a song from the performance list
 - Keep videos and notes of a performance.
 
-## Techologies in the project
+## Techologies
 - React frontend framework
 - Express backend routers
-- Custom CSS Icon Ratings, Ipod design, and Animations throughout
-- SQL database that is set up with Objection
+- SASS, Custom CSS Icon Ratings, Ipod design, and Animations throughout
+- AWS S3
+- YouTube API
+- MusixMatch API
 - Nodejs backend framework
+- PostgreSQL
+- Objection
+- Knex
+- Passport
+- Ant Design
+- Webpack
+
+## Installation
+
+Clone the repo and run the following.
+```
+$ yarn install
+$ cd server
+$ createdb <name-of-project-here>_development
+$ yarn run db:migrate latest
+$ yarn run dev
+```
+Local acces: http://localhost:3000
