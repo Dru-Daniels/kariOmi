@@ -19,7 +19,7 @@ const SongShow = (props) => {
   const [redirect, setRedirect] = useState(false)
 
   const [song, setSong] = useState({})
-  const [practiceNote, setPracticeNote] =useState("")
+  const [practiceNote, setPracticeNote] = useState("")
   
   const { id } = useParams()
 
@@ -33,7 +33,6 @@ const SongShow = (props) => {
       const body = await response.json()
       setSong(body.song)
       setPracticeNote(body.song.practiceNotes)
-
     } catch (error) {
       console.error(error)
       console.error(`Error in fetch ${error.message}`)
@@ -115,7 +114,7 @@ const SongShow = (props) => {
   
   let artist = ' The Artist'
   if (song.artist !== undefined) {
-    artist = song.artist.artistName
+    artist = song.artist
   }
 
 
@@ -182,6 +181,9 @@ const SongShow = (props) => {
 
     <div>
       <h1>Lyrics Drop Herrrr.</h1>
+      <div className='form-show'>
+        <h4 className='song-show-form-title'>Song: {song.songTitle}</h4>
+      </div>
       <div id='needtowrap'>
           <p className='content-lyrics lyrics'>{ str }</p>
       </div>
