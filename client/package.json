@@ -5,7 +5,7 @@
   },
   "license": "UNLICENSED",
   "private": true,
-  "name": "dru-side-project-client",
+  "name": "kariomi-client",
   "version": "0.0.1",
   "engines": {
     "node": "^14.15"

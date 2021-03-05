@@ -7,14 +7,14 @@
     "e2e"
   ],
   "scripts": {
-    "build:client": "yarn workspace dru-side-project-client build",
-    "dev": "yarn workspace dru-side-project-server dev",
-    "dev:debug": "yarn workspace dru-side-project-server dev:debug",
-    "heroku-postbuild": "yarn workspace dru-side-project-client build",
-    "start": "yarn workspace dru-side-project-server start",
-    "dev:cypress": "yarn workspace dru-side-project-server dev:e2e",
-    "e2e:open": "yarn workspace dru-side-project-e2e e2e:open",
-    "e2e:run": "yarn workspace dru-side-project-e2e e2e:run"
+    "build:client": "yarn workspace kariomi-client build",
+    "dev": "yarn workspace kariomi-server dev",
+    "dev:debug": "yarn workspace kariomi-server dev:debug",
+    "heroku-postbuild": "yarn workspace kariomi-client build",
+    "start": "yarn workspace kariomi-server start",
+    "dev:cypress": "yarn workspace kariomi-server dev:e2e",
+    "e2e:open": "yarn workspace kariomi-e2e e2e:open",
+    "e2e:run": "yarn workspace kariomi-e2e e2e:run"
   },
   "engines": {
     "node": "^14.15",

@@ -19,7 +19,7 @@
   "private": true,
   "type": "module",
   "version": "0.0.1",
-  "name": "dru-side-project-server",
+  "name": "kariomi-server",
   "engines": {
     "node": "^14.15"
   },
