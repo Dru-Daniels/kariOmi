@@ -112,7 +112,7 @@ songsRouter.post('/', async (req, res) => {
       trackId 
     })
     const serializedSong =  await SongSerializer.getDetails(song)
-    return res.status(201).json({ song: serializedSong })
+    return res.status(201).json({ songId: serializedSong.id, artistName: artistName })
   } catch (error) {
     if (error instanceof ValidationError) {
       return res.status(422).json({errors: error.data})

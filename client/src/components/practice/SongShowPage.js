@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, Redirect, useLocation } from 'react-router-dom'
 
 import { useParams } from 'react-router'
 
@@ -9,19 +9,19 @@ import SmartCat from '../../assets/scss/images/smartCat.png'
 
 import Ipod from '../layout/Ipod'
 import Card from './Card'
-
 import ToggleSwitch from "../layout/ToggleSwitch"
 import ErrorList from '../ErrorList'
 
 const SongShow = (props) => {
-  
   const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState(false)
-
+  
   const [song, setSong] = useState({})
   const [practiceNote, setPracticeNote] = useState("")
   
   const { id } = useParams()
+  const location = useLocation()
+  const artist = location.state.artistName
 
   const getSong = async () => {
     try {
@@ -111,12 +111,6 @@ const SongShow = (props) => {
 
   const videoSrcK = `https://www.youtube.com/embed/${song.karaokeVideoId}`
   const videoSrcL = `https://www.youtube.com/embed/${song.lyricVideoId}`
-  
-  let artist = ' The Artist'
-  if (song.artist !== undefined) {
-    artist = song.artist
-  }
-
 
   let str
   if(song.lyrics !== undefined && song.lyrics !== "unavailable") {
@@ -182,7 +176,7 @@ const SongShow = (props) => {
     <div>
       <h1>Lyrics Drop Herrrr.</h1>
       <div className='form-show'>
-        <h4 className='song-show-form-title'>Song: {song.songTitle}</h4>
+        <h4 className='song-show-form-title'>{song.songTitle}:</h4>
       </div>
       <div id='needtowrap'>
           <p className='content-lyrics lyrics'>{ str }</p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import SongTile from './SongTile'
 
@@ -11,6 +11,7 @@ const ArtistList = ({artist}) => {
         <SongTile
           key={song.id}
           song={song}
+          artistName={artist.artistName}
           />
       </div>
     )
