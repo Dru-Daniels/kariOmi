@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
+import Spinner from '../layout/Spinner'
 
 import CatMouse from '../../assets/scss/images/catWitMouse.png'
 
@@ -8,6 +9,7 @@ import ArtistList from "./ArtistList"
 const ArtistIndex = props => {
 
   const [artists, setArtists] = useState([])
+  const [spin, setSpin] = useState(true)
 
   const getArtists = async () => {
     try {
@@ -19,19 +21,22 @@ const ArtistIndex = props => {
       }
       const body = await response.json()
       setArtists(body.artists)
+      setSpin(false)
     } catch (error) {
       console.error(`Error in Fetch: ${error.message}`)
     }
   }
 
-  let message; 
+  let message
   if (artists.length > 0) {
     message = (
       <div className='practice-title-container'>
         <h1 className='text-center' id="practice-title">Practice Pad</h1>
       </div>
     )
-  } else {
+  } else if (spin === true) {
+    message = <Spinner spin={spin} alertMessage='Loading Songs!'/>
+  }else {
     message = (
       <div className='practice-title-container'>
         <h1 className='text-center' id="song-form-title-main">Uh oh! You need to add some songs!</h1>
