@@ -34,12 +34,12 @@ songsRouter.get("/", async (req, res) => {
 songsRouter.get('/:id', async (req, res) => {
   const { id } = req.params
   try {
-    const song = await Song.query().findById(id)
-    
+    let song = await Song.query().findById(id)
     let trackId= await song.trackId  
-    const songLyrics = await AxiosClientTrack.searchLyrics(trackId)
+    let songLyrics = await AxiosClientTrack.searchLyrics(trackId)
     song.lyrics = songLyrics
-    const serializedSong = await SongSerializer.getDetails(song)
+    let serializedSong = await SongSerializer.getDetails(song)
+    
     return res.status(200).json({ song: serializedSong })
   } catch (errors) {
     return res.status(500).json({ errors })
@@ -53,7 +53,7 @@ songsRouter.patch('/:id', async (req, res) => {
     const { practiceNotes, lyrics, performanceReady } = req.body
     await Song.query().patch({ practiceNotes: practiceNotes, lyrics: lyrics, performanceReady: performanceReady }).findById(id)
     const song = await Song.query().patchAndFetchById(id, { practiceNotes: practiceNotes, lyrics: lyrics })
-    const serializedSong =  await SongSerializer.getDetails(song)
+    let serializedSong =  await SongSerializer.getDetails(song)
     return res.status(201).json({ song: serializedSong })
   } catch (error) {
     if (error instanceof ValidationError) {
@@ -99,6 +99,7 @@ songsRouter.post('/', async (req, res) => {
       artist = await Artist.query().insertAndFetch({artistName})
       artistId = artist.id
     }
+    lyrics = await AxiosClientTrack.searchLyrics(trackId)
     let song = await Song.query().insertAndFetch({ 
       songTitle, 
       karaokeVideoId, 
