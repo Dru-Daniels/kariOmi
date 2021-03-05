@@ -17,6 +17,7 @@ const NewSongForm = (props) => {
   const [state, setState] = useContext(Context)
   const [userInput, setUserInput] = useState("")
   const [trackTitle, setTrackTitle] = useState("")
+  const [selectedTrackId, setSelectedTrackId] = useState(null)
 
   const [karaokeVideos, setKaraokeVideos] = useState([])
   const [selectedVideo1, setSelectedVideo1] = useState(null)
@@ -162,6 +163,11 @@ const NewSongForm = (props) => {
   }
 
   const handleTrackSelect = (selectedTrack) => {
+    if(selectedTrackId !== selectedTrack.track_id) {
+      setSelectedTrackId(selectedTrack.track_id)
+    } else {
+      setSelectedTrackId(null)
+    }
     setFormData({...formData,
       track : selectedTrack
     })
@@ -193,7 +199,7 @@ return(
           </form>
 
           <form className='new-song-form' onSubmit={handleSubmit}>
-            <Tracks handleTrackSelect={handleTrackSelect} />
+            <Tracks handleTrackSelect={handleTrackSelect} selectedTrackId={selectedTrackId} />
             <h4 id='song-form-title'>Karaoke Videos:</h4>
             <div className='eleven wide column'>
               <VideoDetail video={selectedVideo1}/>
