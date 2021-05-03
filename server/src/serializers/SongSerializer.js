@@ -43,10 +43,14 @@ class SongSerializer {
     let length = scores.length
     let total = scores.reduce((a,b) => a + b, 0)
     let overAllScore = (total / length).toFixed(1)
+    
+    if(!isFinite(overAllScore)) {
+      overAllScore = 0
+    }
 
     serializedSong.performances = await serializedPerformances
     serializedSong.overallSongScore = await overAllScore
-    
+
     return serializedSong
   }
 }

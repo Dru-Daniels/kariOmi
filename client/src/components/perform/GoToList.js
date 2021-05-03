@@ -33,13 +33,15 @@ const GoToList = (props) =>  {
     getGoToSongs()
   }, [])
 
+
+
   let goToSongList = songs.map((song, i) => {
     return (
       <Panel header={song.songTitle} key={song.id}>  
         < GoToSong 
+          key={song.id}
           overAllSongScore={song.overallSongScore}
           performances={song.performances}
-          key={song.id}
           song={song}
           getGoToSongs={getGoToSongs}
         />
