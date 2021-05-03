@@ -71,7 +71,7 @@ const GoToSong = ({song, overAllSongScore, performances, getGoToSongs}) => {
   })
 
   let songScore = overAllSongScore
-  songScore = (isNaN(songScore) ? 'NA' : songScore)
+  songScore = (songScore === 0 ? '0.0' : songScore)
 
   let alertMessage='Uploading Performance! Videos make take time.'
 
